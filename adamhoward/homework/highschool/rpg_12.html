@@ -1,0 +1,946 @@
+<HTML>
+<HEAD><TITLE>Source code for Leprechaun's Revenge</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<H1 ALIGN=CENTER>Source code for <I>Leprechaun's Revenge</I></H1>
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3389475555818795";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text";
+google_ad_channel ="4660932302";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<HR>
+<PRE>Program RPG;
+
+   {This Program is a role-playing text adventure game, where the user plays
+    the part of a lost adventurer. Individual procedures are explained
+    individually.}
+    {Program version 1.2, by Adam Howard and Jerry Miksch}
+
+USES
+ CRT,Windos;
+
+Const
+ Zero = 0;
+
+TYPE
+ CharStat = (Species,Key,Count);
+ CharacterStatus = Array[CharStat] of Integer; {Holds info about character}
+ Location_Type = 0..6;
+ Map_Record = Record {to be put in an array, holds info for map sites}
+              BeenThere : Boolean; {If character has been here, false}
+              ActiveSite : Location_Type;
+              North : Boolean;	
+              South : Boolean;	{These describe which directions}
+              East  : Boolean;	{are allowable from a given site}
+              West  : Boolean;
+ END; { Map_Record}
+ Map_Array = Array[1..3,'A'..'E'] of Map_Record; {puts map_record into array}
+
+VAR
+ VER : Word;
+ Map : Map_Array;
+ Character : CharacterStatus;
+ Command : Char; {Input variable for much of the game}
+ StartChoice : Char; 
+ X : CharStat;
+ YouWin : Boolean;
+ GameOver : Boolean;
+{*************************************************************}
+PRocedure GAME_OVER;
+
+{Displays the game over message.}
+
+BEGIN {gameover}
+ CLRSCR;
+ WRITELN ('GGGGGGGGGGG    AAAAAAAAAAAAA  MMMM        MMMM  EEEEEEEEEEEE');
+ WRITELN ('GGGGGGGGGGG    AAAAAAAAAAAAA  MMMM        MMMM  EEEEEEEEEEEE');
+ WRITELN ('GG             AA         AA  MM MMM    MMM MM  EE');
+ WRITELN ('GG             AA         AA  MM MMM    MMM MM  EE');
+ WRITELN ('GG   GGGGGGGG  AAAAAAAAAAAAA  MM  MMMMMMMM  MM  EEEEEEEEEE');
+ WRITELN ('GG   GGGGGGGG  AAAAAAAAAAAAA  MM   MMMMMM   MM  EEEEEEEEEE');
+ WRITELN ('GG       GG    AA         AA  MM            MM  EE');
+ WRITELN ('GG       GG    AA         AA  MM            MM  EE');
+ WRITELN ('GG       GG    AA         AA  MM            MM  EE');
+ WRITELN ('GGGGGGGGGGG    AA         AA  MM            MM  EEEEEEEEEEEE');
+ WRITELN ('GGGGGGGGGGG    AA         AA  MM            MM  EEEEEEEEEEEE');
+ WRITELN;
+ WRITELN;
+ WRITELN ('OOOOOOOOOOO  VVV          VVV  EEEEEEEEEEEE  RRRRRRRRRRRRRRR');
+ WRITELN ('OOOOOOOOOOO  VVV          VVV  EEEEEEEEEEEE  RRRRRRRRRRRRRRR');
+ WRITELN ('OO       OO   VVV        VVV   EE            RR           RR');
+ WRITELN ('OO       OO   VVV        VVV   EE            RR           RR');
+ WRITELN ('OO       OO    VVV      VVV    EEEEEEEEE     RRRRRRRRRRRRRRR');
+ WRITELN ('OO       OO    VVV      VVV    EEEEEEEEE     RRRRRRRRRRRRRRR');
+ WRITELN ('OO       OO     VVV    VVV     EE            RR      RRR');
+ WRITELN ('OO       OO     VVV    VVV     EE            RR       RRR');
+ WRITELN ('OO       OO      VVV  VVV      EE            RR        RRR');
+ WRITELN ('OOOOOOOOOOO      VVV  VVV      EEEEEEEEEEEE  RR         RRR');
+ WRITELN ('OOOOOOOOOOO       VVVVVV       EEEEEEEEEEEE  RR          RRR');
+ READLN;
+END; {gameover}
+
+{*************************************************************}
+
+Procedure InfiniLoop (Com : Char; VAR Count : Integer);
+
+ {This procedure is one of the hot sites on the map, if the user chooses
+  to continue, they become trapped in a loop until it goes through a
+  number of times, and it gives them a hint. The sub-procedure
+  Labyrinth is the repeating loop.}
+
+{*******************}
+
+Procedure Labyrinth (VAR Count : Integer; Com : Char);
+	{sub procedure of Infiniloop}
+VAR
+ Num:Integer;
+
+BEGIN {labyrinth}
+
+ WRITELN ('You scan the horizon some more. A little north of the black void, you');
+ WRITELN ('see some smoke rising from between the trees.');
+ WRITELN ('''Hmm,'' you think. ''Maybe the forest is on fire.''');
+ WRITELN ('*CREAK!*');
+ WRITELN;
+ WRITELN ('''Uh-oh!'' you think. ''That better not be what I think it is....''');
+ WRITELN ('Your suspicions prove correct. Much of the old timber of the tower has ');
+ WRITELN ('begun to rot. It cannot support your weight much longer. You rush for ');
+ WRITELN ('the ladder........');
+ WRITELN;
+ WRITELN ('....but you''re too late. The floor gives way and you begin to fall.');
+ WRITELN ('You''re falling, falling, falling...and you finally hit bottom.');
+ WRITELN ('....When you finally regain consciousness, you find yourself within a ');
+ WRITELN ('maze of corridors.');
+ WRITELN;
+ WRITELN ('You can go (N)orth (S)outh (E)ast (W)est.');
+ WRITE ('# of moves = ',Count,' --> ');
+ READLN (Com);
+ Count := Count + 1;
+ Num := 1;
+ IF (Com <> 'U') OR (Com <> 'Q') OR (Com <> 'u') OR (Com <> 'q')
+  THEN BEGIN {then com not u or q}
+   WHILE Num < 10 DO
+    BEGIN {while}
+     WRITELN;
+     WRITELN ('The corridors look the same in all directions...');
+     WRITELN;
+     WRITELN ('You can go (N)orth (S)outh (E)ast (W)est.');
+     WRITE ('# of moves - ',Count,' --> ');
+     READLN (Com);
+     num:=NUM+1;
+     Count:=Count+1;
+     IF (Com='U') or (Com='Q') or (Com='q') or (Com='u')
+      THEN Num:=10;
+     END; {WHILE}
+  END; {then com not u or q}
+ IF (Com='U') or (Com='u')
+   THEN WRITELN ('You go back up to the surface.')
+   ELSE IF (Com='Q') or (Com='q')
+        THEN Command:='Q'
+        ELSE BEGIN {else command not q}
+         IF NUM=10
+          THEN BEGIN {MORE THAN 10 MOVES}
+           WRITELN ('Maybe *U* (hint hint) can go back Up to the surface.');
+           REPEAT {begin almost infinite loop}
+            WRITELN;
+	      WRITELN ('You can go (N)orth (S)outh (E)ast (W)est.');
+            WRITE ('# of moves - ',Count,' --> ');
+            READLN (Com);
+            Count := Count + 1;
+            IF Com <> 'U'
+            THEN IF Com <> 'u'
+                  THEN WRITELN ('The corridors look the same in all directions.');
+           UNTIL (Com='U') or (Com='u'); {end almost infinite loop}
+           WRITELN ('You make it back up to the surface.');
+           END; {MORETHAN 10 MOVES}
+        END; {else command not q}
+END; {labyrinth}
+{********************}
+ BEGIN {Infiniloop}
+  WRITELN ('As you walk along, you decide to step off the beaten path. You follow');
+  WRITELN ('a dried streambed until it leads you to a large clearing. Rising high');
+  WRITELN ('above the vegetation and surrounding trees is an abandoned watchtower.');
+  WRITELN;
+  WRITE ('Would you like to climb to the top of the tower? (Y/N) --> ');
+  READLN (Com);
+  IF (Com = 'Y') or (Com = 'y')
+   THEN BEGIN {Yes, climb tower}
+    WRITELN ('Deciding to climb the tower, you step up to the ladder. It takes you ');
+    WRITELN ('several minutes, but finally you reach the top. From this place, you ');
+    WRITELN ('can see around for miles: You see mostly treetops, but far off to the');
+    WRITELN ('west, you see an enormous black void: You recognize it; it is your ');
+    WRITELN ('destination, the same void to which you must return each day, but');
+    WRITELN ('perhaps today the void will return you not to another world such as this,');
+    WRITELN ('but instead take you home.');
+    WRITELN;
+    WRITE ('Would you like to keep looking? (Y/N) --> ');
+    READLN (Com);
+    IF (Com ='Y') or (Com='y')
+     THEN Labyrinth (Count,Com);
+    END; {Yes climb tower}
+END; {infiniloop}
+{************************************************************}
+PRocedure DOORS (GK: Integer; Beenthere: Boolean; Count:Integer; VAR GAMEOVER, YOUWIN: BOOLEAN);
+
+{This is the ending of the game. A random generator gives you the choice of
+ three doors, one of which is eternal damnation, another, eternal glory.}
+
+VAR
+ OPEN : CHAR;
+ DOOR : INTEGER;
+ GOOD1 : INTEGER;
+BEGIN {Doors}
+ {CLRSCR;}
+ WRITELN ('Standing before you, you see three doors.');
+ WRITE ('Do You wish to open one? Y/N:  ');
+ READLN (OPEN);
+ IF (OPEN = 'Y') OR (OPEN = 'y')
+   THEN IF GK = 1
+          THEN BEGIN {have key}
+                WRITE ('Which door do you wish to open? 1, 2, 3:  ');
+                READLN (DOOR);
+                RANDOMIZE;
+                GOOD1:=RANDOM(4);
+                IF DOOR = 5
+                  THEN DOOR := GOOD1;
+                IF DOOR = GOOD1
+                  THEN BEGIN {then}
+                        CLRSCR;
+                        WRITELN ('You step through the door to find yourself enveloped by a white light');
+                        WRITELN ('You realize you have achieved the ultimate goal of all heroes');
+                        WRITELN;
+                        WRITELN;
+                        WRITELN;
+                        WRITELN('                           ETERNAL LIFE WITH THE GODS');
+                        WRITELN;
+                        WRITELN;
+                        WRITELN;
+                        WRITELN('                               HAVE A NICE DAY!!!');
+                        READLN;
+                        YouWin:=True;
+                        END {then}
+                  ELSE BEGIN {else}
+                        CLRSCR;
+                        WRITELN ('You step through the door into a blackness, blacker than the deepest night');
+                        WRITELN ('You see the leprechaun before you, silently mocking your luck.');
+                        WRITELN ('Above him you see a sign:');
+                        WRITELN;
+                        WRITELN;
+                        WRITELN;
+                        WRITELN ('                          WELCOME TO ETERNAL DAMNATION');
+                        WRITELN;
+                        WRITELN;
+                        WRITELN ('                            PLEASE WAIT TO BE SEATED');
+                        READLN;
+                        GAMEOVER := True;
+                        END; {else}
+               END {have key}
+          ELSE BEGIN {not have key}
+                WRITELN ('You walk up to the doors and see engraved upon them these words:');
+                WRITELN ('Seek the leprechaun; he holds the key to my lock.');
+                READLN;
+               END; {not have key}
+
+END; {doors}
+
+{*****************************************}
+Procedure KILL_MONSTER (VAR COM : CHAR; VAR Beenthere : BOOLEAN);
+
+	{This procedure is one of the hot sites on the map. Here, the player
+	 is attacked by a large monster. The player is presented with options
+	 on how to attempt to kill the monster.}
+
+VAR
+   NAY:CHAR;
+   X, ATTACK_TYPE, MONSTER, DAMAGE:INTEGER;
+   DEAD, MDEAD, TIMEDONE:BOOLEAN;
+
+BEGIN {KILL_MONSTER}
+
+ DAMAGE:=0;
+ MONSTER:=200;
+ DEAD:=FALSE;
+ MDEAD:=FALSE;
+ TIMEDONE:=FALSE;
+{ CLRSCR;}
+ WRITELN ('You see a gleam from under the leaves before you.');
+ WRITELN ('As you draw closer,  you notice that the gleam comes from a sword lying ');
+ WRITELN ('under the leaves. You get to the pile of leaves and decide it might be a ');
+ WRITELN ('good idea to have a sword along, just in case.');
+ WRITELN;
+ WRITELN ('As you continue on the path, you catch the faint scent of sulfur and ');
+ WRITELN ('char. The smell of it is starting to make you ill. As you continue on, ');
+ WRITELN ('you notice parts of the forest are burnt. Ahead of you lies a huge ');
+ WRITELN ('valley. Continuing on down into the valley, the smell becomes ');
+ WRITELN ('increasingly stronger. A sound above you draws your attention to....The');
+ WRITELN ('most horrifying monstrosity one can possibly imagine.');
+ WRITELN ('<ENTER>');
+ READLN;
+{ CLRSCR;}
+ WRITELN ('You hear a voice inside your head, "Oh gods above...It''s coming for me!!!!');
+ WRITELN ('As its gigantic wings slowly lower it to the ground.');
+ WRITELN ('It focuses its giant saucer eyes upon your pitiful self.');
+ WRITELN;
+ WRITELN;
+ RANDOMIZE;
+ X:=0;
+ REPEAT   {BEGIN OF LOOP}
+  WRITELN;
+  WRITELN;
+  WRITELN;
+  X:=X+1;
+  WRITELN ('You have the following options:');
+  WRITELN ('1 : Swing the sword at the monster');
+  WRITELN ('2 : Thrust the sword at the monster');
+  WRITELN ('3 : Throw the sword at the monster');
+  WRITELN ('4 : Super-Human, Holy-Moly all-out attack');
+  WRITELN ('             (NOT SUITABLE FOR SMALL CHILDREN)');
+  WRITE ('This is where you make your decision:  ');
+  READLN (ATTACK_TYPE);
+  CASE ATTACK_TYPE OF {BEGIN OF CASE}
+   1 : DAMAGE:=RANDOM(11);
+   2 : DAMAGE:=RANDOM(25);
+   3 : BEGIN {3}
+        DAMAGE:=RANDOM(50);
+        IF DAMAGE <= 15
+           THEN BEGIN {THEN}
+                { CLRSCR;}
+                 WRITELN ('As you toss the sword at the creature, it misses the creature by a');
+                 WRITELN ('near margin, and flies off over the hill.');
+                 WRITELN ('The creature, seeing you disarmed, rushes in for the kill.');
+                 WRITELN ('You feel as if you''re watching yourself from outside your body.');
+                 WRITELN ('As you watch your body being slowly engulfed by the monster,');
+                 WRITELN ('You notice the leprechaun standing upon the ridge.');
+                 WRITELN ('You hear a voice in your head and know it to be the leprechaun''s,');
+                 WRITELN ('"You have lost, inferior human. See you at Hades'' gates.');
+                 READLN;
+                 DEAD:=TRUE;
+                END {THEN}
+           ELSE  WRITELN ('The sword returns to your hand.');
+       END; {3}
+   4 : BEGIN {4}
+        DAMAGE:=RANDOM(100);
+        IF DAMAGE >= 85
+           THEN MDEAD:=TRUE
+           ELSE IF DAMAGE<=20
+                  THEN BEGIN {THEN}
+                        {CLRSCR;}
+                        WRITELN ('As you rush headlong at the creature, it side-swipes your pitiful');
+                        WRITELN ('wretched body but not before you notice a small figure standing');
+                        WRITELN ('on a nearby hill. You know it to be a leprechaun and in your heart');
+                        WRITELN ('you know it to be THE leprechaun.');
+                        READLN;
+                        DEAD:=TRUE;
+                       END; {THEN}
+       END; {4}
+   5 : BEGIN {5} {EASY WAY TO KILL CRITTER}
+{        CLRSCR;}
+        WRITELN ('You say NAY and the creature falls dead.');
+        MONSTER:=0;
+        NAY:='Y';
+       END; {5}
+   ELSE BEGIN {CASE ELSE}
+{         CLRSCR;}
+         WRITELN ('Entering the wrong thing can kill you!');
+         WRITELN ('<ENTER>');
+         END; {CASE ELSE}
+         READLN;
+  END;{CASE}
+  MONSTER := MONSTER - DAMAGE;
+  IF X>=7
+    THEN TIMEDONE:=TRUE;
+  IF MONSTER<=0
+    THEN MDEAD:=TRUE;
+ UNTIL (TIMEDONE=TRUE) OR (MDEAD=TRUE) OR (DEAD=TRUE);
+ IF TIMEDONE
+   THEN BEGIN {THEN}
+         DEAD:=TRUE;
+         GAMEOVER:=TRUE;
+         WRITELN ('You notice as you try increasingly harder that your attacks are');
+         WRITELN ('having no effect on the creature.  Except of course to make it');
+         WRITELN ('very angry with you. You watch with a terror that turns your');
+         WRITELN ('blood to ice. As its gaping maw slowly descends upon you, you');
+         WRITELN ('see a small figure on a hill just a little away from where you');
+         WRITELN ('stand...and you know it to be THE Leprechaun.');
+         READLN;
+        END; {THEN}
+ IF DEAD=TRUE
+   THEN BEGIN {THEN DEAD=TRUE}
+         GAMEOVER:=TRUE;
+        END {THEN DEAD=TRUE}
+   ELSE BEGIN {ELSE NOT DEAD}
+         IF NAY <> 'Y'
+           THEN BEGIN {THEN}
+                 WRITELN ('As you skewer the creature it seems to shrink in on itself and');
+                 WRITELN ('falls over...dead. As you stand over the corpse you feel a great');
+                 WRITELN ('sense of relief. You still live and now you must continue,');
+                 WRITELN ('but not before you notice the creature''s blood eating into the');
+                 WRITELN ('metal of the sword. Quickly dropping the sword and watching in');
+                 WRITELN ('fascination as the sword is corroded into a lump of metal.');
+                END {THEN}
+           ELSE BEGIN{ELSE}
+                 WRITELN ('As you stand over the corpse you feel a great sense of relief.');
+                 WRITELN ('You still live and now you must continue you notice the sword has');
+                 WRITELN ('disappeared.');
+                 END;{ELSE}
+            Beenthere:=TRUE;
+        END; {ELSE NOT DEAD}
+END;   {KILL_MONSTER}
+
+{*************************************************************}
+PROCEDURE COIN_TOSS (VAR CoinPlace : Boolean;
+                     VAR Gameover,YouWin : Boolean;
+                     VAR Character : CharacterStatus);
+
+	{This Procedure is a hot site on the map; here the player is faced
+	 with the deadly coin toss of doom. The player must enter either
+	 (H)eads or (T)ails (upper or lower case). They may enter any other
+	 character value, but this will only be using up a valuable turn.}
+
+VAR
+   X, WON, TOSS : INTEGER;
+   TOSS1, CHOICE : CHAR;
+   Good : Boolean;
+BEGIN {COIN_TOSS}
+ WON:=0;
+ WRITELN ('A leprechaun jumps from the bushes beside you holding a gold coin');
+ WRITELN ('in his hand as if a dagger. He tosses the coin at you, saying');
+ WRITELN ('"That is your life; in order to keep it, you must flip 3 times');
+ WRITELN ('and determine the outcome. If you succeed, you will pass the test');
+ WRITELN ('and continue on.');
+ WRITELN ('Choose Wisely: Your Fate is in your hand."');
+ WRITELN;
+ RANDOMIZE;
+ FOR X:=1 TO 3 DO
+  BEGIN {for}
+   WRITE ('You flip the coin into the air, will it be (H)eads or (T)ails: ');
+   READLN (CHOICE);
+   IF (Ord (Choice)) = 104
+     THEN Choice:='H'
+     ELSE IF (Ord (Choice)) = 116
+            THEN Choice:='T';
+   IF (CHOICE <>'T') AND (CHOICE <>'t') AND (CHOICE <>'H') AND (CHOICE<> 'h')
+     THEN WRITELN ('The leprechaun says, "(H)eads or (T)ails. You just lost a turn!"');
+   TOSS:=RANDOM(2);
+   IF TOSS = 1
+     THEN TOSS1:='H'
+     ELSE TOSS1:='T';
+   IF CHOICE = TOSS1
+     THEN WON:=WON + 1;
+   IF (CHOICE = 'W') or (Choice='w')
+     THEN BEGIN {then}
+           WON:= 3;
+           Character[Species] := 5;
+          END; {then}
+   IF CHOICE = '>'
+     THEN BEGIN {then}
+          WON:=3;
+          YouWin:=True;
+    END; {then}
+  END; {for}
+ WRITELN ('The leprechaun says "You have won ', WON ,' times out of 3 tosses."');
+ IF WON > 1
+   THEN BEGIN {then}
+         WRITELN ('"You have passed the test; keep the coin." And he vanishes into');
+         WRITELN ('the bush. After watching him go, you look at the coin only to');
+         WRITELN ('notice that it is now a key!');
+         WRITELN;
+         CoinPlace:=True;
+         Character[Key]:= 1;
+        END {then}
+        ELSE BEGIN {else}
+              WRITELN ('"Sorry but you''ve lost your luck." The Leprechaun unsheathes his');
+              WRITELN ('dagger and plunges its hilt deep into your heart.');
+              WRITELN;
+              Gameover := True;
+              READLN;
+             END; {else}
+END;{cointoss}
+
+{************************************************************}
+Procedure CheckSite (VAR Map : Map_Array; VAR Character : CharacterStatus;
+			   VAR YouWin, GAMEOVER : Boolean; VAR Command : Char;
+			   Row : Integer; Col : Char);
+
+{Procedure to check if a location on the map is a hot site with a
+ special procedure to take care of any actions there.}
+
+BEGIN {checksite}
+ CASE Map[Row,Col].ActiveSite OF
+  0 : BEGIN {0}
+       IF Map[Row,Col].Beenthere=True
+         THEN Writeln ('There''s still a lot of trees here, just like last time.')
+         ELSE BEGIN {0b}
+              WRITELN ('There are trees all around. You hear a bird in the distance.');
+              Map[Row,Col].Beenthere:=True;
+              END; {0b}
+      END; {0}
+  1 : BEGIN {1}
+       IF Map[Row,Col].Beenthere=True
+         Then writeln ('You see flies buzzing around the already rotting corpse of the creature.')
+         ELSE BEGIN {1b}
+               Map[Row,Col].Beenthere:=True;
+               WRITELN ('  You breathe in the pleasant-smelling forest air.');
+               WRITELN ('You forget you are lost in a labyrinth of a world,');
+               WRITELN ('as you realize how truly wonderful this place really');
+               WRITELN ('is. You listen to the birds singing, and see a small');
+               WRITELN ('chipmunk scamper across the footpath.');
+               WRITELN ('<MORE>');
+               READLN;
+               WRITELN ('  Suddenly a hideous creature, about the size of a small');
+               WRITELN ('horse bursts out of the brush and closes its mouth');
+               WRITELN ('around the chipmunk, swallowing it with large chunk');
+               WRITELN ('of earth. The creature turns and sees you. You try to');
+               WRITELN ('run, but it is as if your feet have been glued to the');
+               WRITELN ('ground. The creature senses your fear. It moves closer.');
+               WRITELN ('  You have no choice in the matter, if you run it will');
+               WRITELN ('hunt you down, then tear you limb from limb, but if you');
+               WRITELN ('stay, it will likely do the same.');
+               WRITELN ('<MORE>');
+               READLN;
+               WRITELN ('  You close your eyes, saying a small prayer. Then you');
+               WRITELN ('open your eyes, prepared to accept your fate.');
+               WRITELN ('The creatures moves closer, opening its mouth.');
+               WRITELN ('  ''That''s interesting,'' you think. Its mouth seems to');
+               WRITELN ('have grown to nearly the size of its whole body.');
+               WRITELN ('  Suddenly, a tree bough gives way far above your head.');
+               WRITELN ('Both you and the creature look up. The bough crashes');
+               WRITELN ('into the creature, smashing its skull.');
+               WRITELN ('  You find yourself bruised by some of the side branches,');
+               WRITELN ('but nothing more.');
+               WRITELN ('  A voice echoes through the forest, "Silly adventurer.');
+               WRITELN ('Next time it will be you. Hahahahaha."');
+              END; {1b}
+      END; {1}
+  2 : BEGIN {2}
+       IF Map[Row,Col].Beenthere=True
+         THEN writeln ('you see that the leprechaun is no longer here.')
+         ELSE Coin_Toss (Map[1,'A'].Beenthere, GAMEOVER, YouWin, Character);
+      END; {2}
+  3 : BEGIN {3}
+       IF Map[Row,Col].Beenthere=True
+         THEN WRITELN ('Everything looks much as it did before.')
+         ELSE IF Character[Key] = 1
+                THEN BEGIN {then}
+                      WRITELN ('You see a large wooden door standing in the middle of');
+                      WRITELN ('the forest. Though you can see past it, you cannot go');
+                      WRITELN ('around it. You test the door: It is locked.');
+                      WRITELN ('Suddenly, the key flies out of your pocket and into the');
+                      WRITELN ('lock. The key turns, and the door opens, and you can now ');
+                      WRITELN ('proceed through the door.');
+                      Map[Row,Col].East:=True;
+                      END {then}
+                ELSE BEGIN {else}
+                      WRITELN ('You see a large wooden door standing in the middle of');
+                      WRITELN ('the forest. Though you can see past it, you cannot go');
+                      WRITELN ('around it. You test the door: It is locked.');
+                     END; {else}
+      END; {3}
+
+  4 : BEGIN {4}
+       IF Map[Row,Col].Beenthere=true
+         THEN WRITELN ('You see the motionless corpse of the monster lying beside the path')
+         ELSE Kill_Monster (COMMAND, MAP[2,'D'].BEENTHERE);
+      END; {4}
+  5 : BEGIN {5}
+       Doors (Character[Key], Map[3,'E'].BeenThere, Character[Count], GAMEOVER, YouWin);
+      END; {5}
+  6 : BEGIN {6}
+       IF Map[Row,Col].Beenthere = True
+         THEN WRITELN ('You opt not to follow the streambed this time.')
+         ELSE InfiniLoop (Command, Character[Count]);
+      END; {6}
+ END;{case}
+
+END; {checksite}
+
+{***********************************************************}
+PROCEDURE Instructions;
+
+	{This Procedure gives the instructions for playing the game.}
+
+BEGIN {instructions}
+
+ CLRSCR;
+ GOTOXY (24,2);
+ WRITELN ('How to play Leprechaun''s Revenge');
+ GOTOXY (24,3);
+ WRITELN ('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-');
+ WRITELN;
+ WRITELN ('If you''re here, you already understand how the key input works');
+ WRITELN ('for the game.');
+ WRITELN ('To play the game, imagine yourself in a box on a checkerboard. In');
+ WRITELN ('some of the boxes, there is a challenge or obstacle for you to ');
+ WRITELN ('overcome. When you arrive at a location with a challenge, you');
+ WRITELN ('will not be able to use the directional commands until you defeat');
+ WRITELN ('the obstacle or if you succomb to it.');
+ WRITELN ('Whenever you have the option to enter a direction, you may also');
+ WRITELN ('hit ''Q'' to quit.');
+ WRITELN ('The object of the game is not merely to overcome all obstacles,');
+ WRITELN ('but also to do so in the fewest moves possible. So even after you');
+ WRITELN ('beat the game, play again to see if you can do better!');
+ WRITELN ('That should be all the instructions you''ll need.');
+ WRITELN ('Hit <ENTER> when ready.');
+END; {instructions}
+
+{***********************************************************}
+Procedure ChooseChar (VAR CType : Integer);
+
+        {This procedure prompts the user to choose the character type
+         that he/she wishes to be. The Character Type later influences
+         the final score.}
+
+VAR
+ Input : Integer;
+ Good : Boolean;
+
+BEGIN {choosechar}
+ CLRSCR;
+ Good := False;
+ REPEAT {begin repeat}
+  WRITELN;
+  WRITELN ('Now you must choose the character that you want to be. You');
+  WRITELN ('must choose one of the following:');
+  WRITELN;
+  WRITELN ('(1) Human');
+  WRITELN ('(2) Wizard');
+  WRITELN ('(3) Dwarf');
+  WRITELN ('(4) Ogre');
+  WRITELN;
+  WRITELN ('You will find that by using different characters, you will get a');
+  WRITELN ('different score. It is up to you to find the optimal character.');
+  WRITE ('Please enter your choice now. --> ');
+  READLN (Input);
+  IF (Input < 5) AND (Input > 0)
+   THEN BEGIN {input good}
+         CType := Input;
+         Good := True;
+        END {input good}
+   ELSE WRITELN ('Invalid Input. That''s not a proper character type.');
+  {WRITELN ('Please press <ENTER>.');
+  READLN;}
+ UNTIL Good = True; {end repeat}
+END; {Choosechar}
+{***********************************************************}
+Procedure Winner (Character : CharacterStatus; YouWin : Boolean);
+
+        {procedure to determine player's score based on the Count
+         and on the character type.}
+VAR Score : Integer;
+    C : Integer;
+
+BEGIN {winner}
+
+ C := Character[Count];
+ IF Character[Species] = 5
+   THEN Character[Species] := Character[Count] - 1;
+ Score := Character[Count] - Character[Species];
+ CLRSCR;
+ WRITELN;
+ WRITELN ('Here''s where you are on the Score-o-Meter:');
+ WRITELN;
+ WRITELN ('     ษอป');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('     บ บ');
+ WRITELN ('    ษผ ศป');
+ WRITELN ('    ศอออผ');
+ WRITELN ('You made a total of ', C, ' moves.');
+ IF YouWin
+ THEN BEGIN {winning themometer}
+ IF Score < 8
+  THEN BEGIN {<8}
+        GOTOXY (7,5);
+        WRITE ('X');
+        GOTOXY (10,7);
+        WRITE ('You played a great game (or you discovered Cheat Mode)!');
+       END {<8}
+  ELSE IF Score < 16
+        THEN BEGIN {<16}
+              GOTOXY (7,7);
+              WRITE ('X');
+              GOTOXY (10,7);
+              WRITE ('You rank among the best to play this game!');
+             END {<16}
+        ELSE IF Score < 31
+              THEN BEGIN {<31}
+                    GOTOXY (7,9);
+                    WRITE ('X');
+                    GOTOXY (10,9);
+                    WRITE ('Not bad. Spend less time wandering, though.');
+                   END {<31}
+              ELSE IF Score < 60
+                    THEN BEGIN {<60}
+                          GOTOXY (7,11);
+                          WRITE ('X');
+                          GOTOXY (10,11);
+                          WRITE ('Two words: Needs much improvement.');
+                         END {<60}
+                    ELSE BEGIN {>= 60}
+                          GOTOXY (7,13);
+                          WRITE ('X');
+                          GOTOXY (10,13);
+                          WRITE ('Why did you play in the first place?');
+                         END; {>=60}
+ END {winning themometer}
+ ELSE BEGIN {losing thermometer}
+
+  GOTOXY (7,14);
+  WRITELN ('X');
+  GOTOXY (10,13);
+  WRITE ('You Lost! You missed the mark! You bit the big one!');
+
+ END; {losing thermometer}
+ GOTOXY (30,18);
+ WRITELN ('Press <ENTER> to continue...');
+ READLN;
+END; {Winner}
+
+{***********************************************************}
+Procedure Initialize (VAR Map : Map_Array; VAR Character : CharacterStatus;
+                      VAR YouWin, GameOver : Boolean);
+
+	{This procedure initializes all global variables.}
+
+VAR
+ Row : Integer;
+ Col : Char;
+
+BEGIN {Initialize}
+
+ For Row := 1 To 3 Do
+    For Col := 'A' to 'E' Do
+       With Map[Row,Col] Do
+          BEGIN {with Map[Row,Col]}
+             BeenThere := False;
+             ActiveSite := Zero;
+             North := True;
+             South := True;
+             West := True;
+             East := True;
+          END; {with Map[Row, Col]}
+ For Col := 'A' to 'E' Do
+    BEGIN {for col a to e}
+      WITH Map[1,Col] DO
+        North := False;
+      With Map[3,Col] DO
+        South := False;
+    END; {for col a to e}
+ For Row := 1 to 3 DO
+    BEGIN {for row 1 to 3}
+      WITH Map[Row,'A'] DO
+        West := False;
+      WITH Map[Row,'E'] DO
+        East := False;
+    END; { for row 1 to 3}
+ Map[2,'C'].East := False;
+ Map[2,'C'].North:= False;
+ Map[2,'E'].South := False;
+ Map[1,'C'].East := False;
+ Map[1,'C'].South := False;
+ Map[3,'D'].North := False;
+ Map[2,'A'].ActiveSite := 1;
+ Map[1,'A'].ActiveSite := 2;
+ Map[1,'C'].ActiveSite := 3;
+ Map[2,'D'].ActiveSite := 4;
+ Map[3,'E'].ActiveSite := 5;
+ Map[3,'B'].ActiveSite := 6;
+ FOR X:=Species TO Count DO
+    Character[X]:= Zero;
+ YouWin := False;
+ GameOver := False;
+END; {Initialize}
+
+{*******************************************************************}
+PROCEDURE GAME (VAR Map : Map_Array; VAR Character : CharacterStatus;
+                VAR YouWin, GameOver : Boolean; Command : Char);
+
+{This Procedure is the main game "engine," it is to this procedure that
+ the user enters all of the commands to move about. Once a command is
+ entered, it is checked whether it is to quit, if not, the command is
+ executed and the player "moves" to the new position on the map. Then
+ the CheckSite procedure is called, which then calls a procedure if the
+ site has been designated a hot site. after that, control is passed back
+ to this procedure.}
+
+VAR
+   Row : Integer;
+   Col : Char;
+
+BEGIN {GAME}
+ChooseChar (Character[Species]);
+Row := 2;
+Col := 'B';
+WRITELN ('  And so the story begins.....');
+WRITELN ('  You once were a successful businessperson, CEO of a large multinational');
+WRITELN ('corporation. Now, however, you find yourself lost in a strange world,');
+WRITELN ('where certainty has become uncertainty, where myths become reality.');
+WRITELN ('  Today is just like all the rest that you can remember:');
+WRITELN ('You are trapped within a labyrinth of a world, where the only way');
+WRITELN ('to survive is to overcome all of the challenges you are presented');
+WRITELN ('with. This time, you start off in the middle of a deep dark forest.');
+REPEAT {begin repeat}
+ WRITE ('Which way do you want to go? You can go');
+ IF (Not Youwin) and (not Gameover)
+   THEN BEGIN {read command}
+ IF Map[row,col].north then write (' (N)orth');
+ IF Map[row,col].south then write (' (S)outh');
+ IF Map[row,col].east then write (' (E)ast');
+ IF Map[row,col].west then write (' (W)est');
+ WRITELN('.');
+ Write ('# of moves = ',Character[Count], ' --> ');
+ READLN (Command);
+   END; {read command}
+ IF YouWin = True
+   THEN BEGIN {Game's won}
+         Winner (Character, YouWin);
+         Command := 'Q';
+        END {Game's won}
+   ELSE IF GAMEOVER = True
+         THEN BEGIN {GameOver}
+               GAME_OVER;
+               Winner (Character, YouWin);
+               Command := 'Q';
+ 	     END {GameOver}
+  	ELSE BEGIN {normal interpret move}
+                Character[Count]:=Character[Count] + 1;
+		CASE Command OF
+		   'n', 'N' : BEGIN {north}
+		          IF map[row,col].north=false
+		            THEN WRITELN ('You can''t go that way.')
+		            ELSE BEGIN {else}
+		                  row := row - 1;
+		                  CheckSite (Map, Character, YouWin, GAMEOVER, Command, Row, Col);
+		                  END; {else}
+		         END; {north}
+		   's', 'S' : BEGIN {south}
+		          IF map[row,col].south=false
+		            THEN WRITELN ('You can''t go that way.')
+		            ELSE BEGIN
+		                  row := row + 1;
+		                  CheckSite (Map, Character, YouWin, GAMEOVER, Command, Row, Col);
+		                  end; {else}
+		         END; {south}
+		   'e', 'E' : Begin {east}
+		          IF map[row,col].east=false
+		            then writeln ('You can''t go that way.')
+		            else begin
+		                  Inc (col);
+		                  CheckSite (Map, Character, YouWin, GAMEOVER, Command, Row, Col);
+		                  end; {else}
+		         END; {east}
+		   'w', 'W' : Begin {west}
+		          IF map[row,col].west=false
+		            then writeln ('You can''t go that way.')
+		            else begin
+		                  Dec (col);
+		                  CheckSite (Map, Character, YouWin, GAMEOVER, Command, Row, Col);
+		                  end; {else}
+		         END; {west}
+		   'Q', 'q' : BEGIN {quit?}
+	                         WRITELN ('Are you sure you want to quit? (Y/N) --> ');
+    		               	 READLN (Command);
+	                         IF (Command='Y') or (Command = 'y')
+	                         THEN Command:='Q';
+	                      END; {Quit?}
+                   ELSE WRITELN ('You hear a mysterious voice, "I don''t understand you."');
+
+    	     end; {case}
+        END; {normal interpret move}
+UNTIL COMMAND='Q'; {end repeat}
+END; {Game}
+
+{************************************************************}
+BEGIN {MAIN}
+   StartChoice:='N';
+   REPEAT {begin repeat}
+   CLRSCR;
+   WRITELN;
+   WRITELN ('Welcome to...');
+   TEXTColor(LightGreen);
+   GOTOXY (28,3);
+   WRITELN ('ีออออออออออออออออออออออธ');
+   GOTOXY (28,4);
+   WRITE ('ณ ');
+   TEXTCOLOR(LightRed);
+   WRITE ('Leprechaun''s Revenge ');
+   TEXTColor(LightGreen);
+   WRITELN('ณ');
+   GOTOXY (24,5);
+   WRITELN ('ีอออฯออออออออออออออออออออออฯอออธ');
+   GOTOXY (24,6);
+   WRITE ('ณ');
+   TEXTColor(LightCyan);
+   WRITE ('   The Game You Can''t Win!!   ');
+   TEXTColor(LightGreen);
+   WRITELN ('ณ');
+   GOTOXY (24,7);
+   WRITELN ('ิออออออออออออออออออออออออออออออพ');
+   NormVideo;
+   WRITELN;
+   Ver := DosVersion;
+   Writeln('Running under DOS version ', Lo(Ver), '.',Hi(Ver));
+   WRITELN;
+   Writeln ('These are your options:');
+   WRITELN ('(N)ew Game');
+   WRITELN ('(L)oad a saved game -- not available in shareware version');
+   WRITELN ('(I)nstructions');
+   WRITELN ('(Q)uit program');
+   WRiteln;
+   WRITELN ('Please turn your CAPSLOCK key ON.');
+   WRITELN;
+   WRITE ('You may enter your choice now --> ');
+   READLN (StartChoice);
+   CASE StartChoice OF
+     'n', 'N' : BEGIN {N}
+           Initialize (Map, Character, YouWin, GAMEOVER);
+	     Map[1,'A'].Beenthere:=False;
+           WRITELN ('Ahhh, you have chosen to start a new game, brave soul...');
+           GAME (Map, Character, YouWin, GAMEOVER, Command);
+           END; {N}
+     'l', 'L' : BEGIN {L}
+           WRITELN ('This option is not implemented in the shareware version');
+           WRITELN ('Please press <ENTER>.');
+           READLN;
+           END; {L}
+     'i', 'I' : BEGIN {I}
+           Instructions;
+           READLN;
+           END; {I}
+     'q', 'Q' : BEGIN {Q}
+           WRITELN ('So, you want to quit, eh? Well, GOOD! I''ve put up with');
+           WRITELN ('enough of your antics. Go Away!!!! Oh, and Press <ENTER>.');
+           StartChoice := 'Q';
+           END; {Q}
+     ELSE BEGIN {else}
+          WRITELN ('Invalid choice. Please press <ENTER>.');
+          READLN;
+          END; {else}
+   END;{CASE}
+   UNTIL StartChoice = 'Q'; {end repeat}
+readln;
+END {MAIN}.
+</PRE>
+<HR>
+Return to <A HREF="homework.html" Target="_top">Adamz Hoemwurk Paij</A>.
+</BODY>
+</HTML>
+
+

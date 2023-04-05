@@ -1,0 +1,45 @@
+/* Created by Adam Howard, aihoward@byzantinecommunications.com */
+
+.button {font:bold 0.6em 'comic sans ms',sans-serif;}
+.redtext {color:#CC0000}
+.greentext {color:#00CC00}
+.bluetext {color:#0000CC}
+.smaller {font-size: smaller; }
+.center {text-align: center;}
+.center {text-align: left;}
+   .logobig { font-size: 200%; text-align: left; }
+   .logosmall { font-size: 130%; text-align: left; }
+
+.banner {border: 0; }
+
+p { font-family: sans-serif;
+}
+
+body 	{ margin: 0;
+	  padding: 0;
+	  font-family: helvetica, arial, sans-serif;
+	  color: #000000;
+	  background-color: #ffffff;
+	}
+a:hover { font-weight:bold; color:#CC0000; }
+a:link { text-decoration:underline; }
+
+table.right { float: right; }
+
+div.left { float: left; border-width: 2px; border-color: #AAAAAA; padding-right: 15px; padding-bottom: 15px; }
+
+img.right { float: right; border: 0; }
+
+p.center { text-align: center; }
+
+p.logo { font-family: courier;
+         font-weight: bold;
+         font-size: 130%;
+	 color: #cccccc;
+       }
+p.menu { font-family: sans-serif;
+       }
+p.small { font-size: 70%;
+       }
+h2     { font-family: sans-serif;
+	}

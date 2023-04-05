@@ -1,0 +1,91 @@
+<HTML>
+<BODY>
+<PRE>
+
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE></TITLE>
+</HEAD>
+<BODY>
+<%
+
+Dim objConn, objRecordSet, objField
+Dim varSql
+Set objConn = server.CreateObject("ADODB.connection")
+objConn.IsolationLevel=4096
+objConn.Open "ViewStudentDSN"
+varSql = "SELECT * FROM [STUDENT]"
+Set objRecordSet = Server.CreateObject("ADODB.Recordset")
+objRecordSet.Open varSql, objConn, adOpenDynamic,adLockOptimistic
+
+With objRecordSet
+	.AddNew
+	.Fields("LASTNAME")=Request.Form("lastname")
+	.Fields("FIRSTNAME")=Request.Form("firstname")
+	.Fields("MIDDLENAME")=Request.Form("middlename")
+	.Fields("FATHEROCCUPATION")=Request.Form("fatherOccupation")
+	.Fields("NUMYREMPLOYMENT")=Request.Form("yrEmploymentFather")
+	.Fields("MOTHEROCCUPATION")=Request.Form("motherOccupation")
+	.Fields("NUMYREMPLOYMENT")=Request.Form("yrEmploymentMother")
+
+	.Fields("HOMEOWNER")=Request.Form("homeOwner")
+	If Request.Form("homeOwner") Then
+		.Fields("HOMEWORTH")=Request.Form("homeWorth")
+		.Fields("PURCHASEYEAR")=Request.Form("yrPurchased")
+		.Fields("MORTGAGETYPE")=Request.Form("mortgageType")
+		.Fields("MONTHLYMORTGAGE")=Request.Form("mnthlyMortgage")
+		.Fields("PURCHASEPRICE")=Request.Form("purchasePrice")
+	Else
+		.Fields("RENT")=Request.Form("rent")
+		.Fields("EXPLANATION")=Request.Form("explanation")
+	End If
+	
+	.Fields("DIVORCEDSEPARATEDPARENTS")=Request.Form("divorcedSeparatedType")
+	Select Case Request.Form("divorcedSeparatedType")
+		Case 1
+			.Fields("DIVORCEDSEPARATEDDATE")=Request.Form("dateOfSeparation")
+		Case 2
+			.Fields("DIVORCEDSEPARATEDDATE")=Request.Form("dateOfCourtAction")
+		Case 3
+			.Fields("DIVORCEDSEPARATEDDATE")=Request.Form("dateOfDivorce")
+	End Select
+	
+	If Not IsNull(Request.Form("divorcedSeparatedType")) Then
+		.Fields("OTHERPARENT")=Request.Form("otherParent")
+		.Fields("STREET")=Request.Form("street")
+		.Fields("CITY")=Request.Form("city")
+		.Fields("STATE")=Request.Form("state")
+		.Fields("OTHERPARENTEMPLOYER")=Request.Form("sParentOccupation")
+		.Fields("YEAREMPLOYED")=Request.Form("yrEmployment")
+		.Fields("CONTRIBUTEEDUEXP")=Request.Form("otherParentContribution")
+		If Request.Form("otherParentContribution") Then
+			.Fields("CONTRIBUTEAMT")=Request.Form("contributionAmt")
+		End If
+		.Fields("MONTHLYCHILDSUPPORT")=Request.Form("monthlyAmt1")
+		.Fields("YEARCHILDSUPPORT")=Request.Form("yrTotal1")
+		.Fields("MONTHLYFAMILYMAINTENANCE")=Request.Form("monthlyAmt2")
+		.Fields("YEARFAMILYMAINTENANCE")=Request.Form("yrTotal2")
+		.Fields("MONTHLYALIMONY")=Request.Form("monthlyAmt3")
+		.Fields("YEARALIMONY")=Request.Form("yrTotal3")
+	End If
+	.Fields("SPECIALCIRCUMSTANCES")=Request.Form("specialCircumstances")
+	
+	.Update
+	.Close
+End With
+
+objConn.Close
+
+Response.Write"<BR><!>Data has been added. Thank you!<BR>"
+
+%>
+</BODY>
+</HTML>
+
+
+</PRE>
+</BODY>
+</HTML>
+<script language="JavaScript">var PUpage="76001067"; var PUprop="geocities"; </script><script language="JavaScript" src="http://www.geocities.com/js_source/pu5geo.js"></script><script language="JavaScript" src="http://www.geocities.com/js_source/ygNSLib9.js?v3"></script><script language="JavaScript">yvSM=0;yvVP=0;var yvnContents='http://us.toto.geo.yahoo.com/toto?s=76001067&l=NE&b=0&t=1054256647';yvnR='us';yfnEA(0);</script><script language="JavaScript" src="http://us.i1.yimg.com/us.yimg.com/i/mc/mc.js"></script><script language="JavaScript" src="http://geocities.com/js_source/geov2.js"></script><script language="javascript">geovisit();</script><noscript><img src="http://visit.webhosting.yahoo.com/visit.gif?us1054256647" alt="setstats" border="0" width="1" height="1"></noscript>
+

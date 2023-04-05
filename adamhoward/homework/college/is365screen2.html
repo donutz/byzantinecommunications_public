@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>Family Information Form</TITLE>
+</HEAD>
+<BODY bgColor=#f7ca91>
+
+<P align=center><STRONG>University of
+Wisconsin-Madison</STRONG><BR>
+<STRONG>FAMILY INFORMATION FORM (FIF) 2001-2002</STRONG></P>
+<P><STRONG>DO NOT COMPLETE THIS FORM IF ANY OF THESE
+CONDITIONS APPLY TO THE STUDENT</STRONG>             : 1) 
+If you were born before January 1, 1978; 2) If you are married; 3) If you are a
+veteran of the U.S. Armed Forces; 4) If you are a ward of the court or both your 
+parents are deceased; or 5) If you have legal dependents other than a 
+spouse.</P>
+<FORM method=post action="submitFIF.asp">
+<P>
+<TABLE width="75%">
+  <TR>
+    <TD><STRONG>STUDENT NAME</STRONG></TD>
+    <TD><INPUT size=14 name=lastname></TD>
+    <TD><INPUT size=14 name=firstname></TD>
+    <TD><INPUT size=12 name=middlename></TD></TR>
+  <TR>
+    <TD></TD>
+    <TD>last</TD>
+    <TD>first</TD>
+    <TD>middle</TD></TR></TABLE></P>
+<P><STRONG>Student Social Security Number <INPUT id=text1 name=SocialSecurity maxlength=9 size=9></STRONG></P>
+<P align=center><STRONG>ALL QUESTIONS BELOW SHOULD BE ANSWERED BY THE PARENT(S)</STRONG></P>
+<P>1. <STRONG><U>PARENT OCCUPATION/EMPLOYER</U></STRONG>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>Please list parents' occupations or emplooyers below.&nbsp; If parents are 
+  separated or divorced, please list information about the parent not completing 
+  this form in item 4 below. </P>
+  <P>    
+  <TABLE>
+
+    <TR>
+      <TD>Occupation/employer - father</TD>
+      <TD><INPUT name=fatherOccupation
+        ></TD>
+      <TD>No. of years with this employer</TD>
+      <TD><INPUT maxlength=2 size=2
+        name=yrEmploymentFather></TD></TR>
+    <TR>
+      <TD>Occupation/employer - mother</TD>
+      <TD><INPUT name=motherOccupation 
+        ></TD>
+      <TD>No. of years with this employer</TD>
+      <TD><INPUT maxlength=2 size=2 
+        name=yrEmploymentMother></TD></TR></TABLE>
+  </P></BLOCKQUOTE>
+  <P>2.&nbsp; <STRONG><U>HOME OWNERS</U></STRONG>
+</P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>Do you own a home?&nbsp;&nbsp;&nbsp;&nbsp;Yes<INPUT name=homeOwner type=radio   value=yes> No<INPUT name=homeOwner type=radio value=no> <BR> If yes, please complete the rest of this   item and then go to item 4; if no, go to item 3. 
+  </P>
+  <P>
+  <TABLE cellSpacing=5 cellPadding=1 width="75%" border=0>
+    
+    <TR>
+      <TD>What is home worth today?</TD>
+      <TD>$<INPUT size=8 name=homeWorth 
+       ></TD>
+      <TD>What is owed on it?</TD>
+      <TD>$<INPUT size=8 name=mortgageType
+       ></TD></TR>
+    <TR>
+      <TD>What year was it purchased?</TD>
+      <TD>
+        <P>&nbsp;&nbsp;<INPUT size=4 maxlength=4 name=yrPurchased></P></TD>
+      <TD>Monthly home mortgage</TD>
+      <TD>$<INPUT size=8 name=mnthlyMortgage
+       >/mo.</TD></TR>
+    <TR>
+      <TD>What was the purchase price?</TD>
+      <TD>$<INPUT size=8 name=purchasePrice
+       ></TD>
+      <TD></TD>
+      <TD></TD></TR></TABLE>
+</P>
+</BLOCKQUOTE>
+
+<P>3.&nbsp; <STRONG><U>RENTERS</U></STRONG>
+</P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>What is your monthly rental payment? $<INPUT size=5 maxlength=5 id=text2 name=rent>/mo. </P>
+  <P>  If none, please explain<INPUT   id=text1 style="WIDTH: 396px; HEIGHT: 22px" size=56 name=explanation  > </P>
+</BLOCKQUOTE>
+
+ <P>4.&nbsp; <STRONG><U>DIVORCED/SEPARATED PARENTS</U></STRONG>
+</P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>Student's parents are (choose one):
+  <TABLE cellSpacing=1 cellPadding=1 width="75%" border=0>
+
+    <TR>
+      <TD><INPUT id=radio1 type=radio name=divorcedSeparatedType value=1></TD>
+      <TD>Separated (No Court Action)</TD>
+      <TD>Date of Separation</TD>
+      <TD><INPUT id=text1 name=DateOfSeparation
+        size=10></TD></TR>
+    <TR>
+      <TD><INPUT type=radio name=divorcedSeparatedType value=2></TD>
+      <TD>Legally Separated</TD>
+      <TD>Date of Court Action</TD>
+      <TD><INPUT size=10 name=DateOfCourtAction
+       ></TD></TR>
+    <TR>
+      <TD><INPUT type=radio name=divorcedSeparatedType value=3></TD>
+      <TD>Divorced</TD>
+      <TD>Date of Divorce</TD>
+      <TD><INPUT size=10 name=DateOfDivorce
+       ></TD></TR></TABLE>    
+  </P>
+  <P>If parents are divorced or separated, complete this section about the parent with whom the student <STRONG>lived with the least </STRONG>in the last 12 months.&nbsp; If the student did not live with one parent less than the other in the last 12 months, complete this section about the parent who provided the <STRONG>least </STRONG>financial support.
+  <P>Other parent's name: <INPUT name=sParentName
+  ><BR>
+  Home address: street<INPUT
+  name=street>&nbsp;city<INPUT
+  size=10 name=city
+ >&nbsp;state<INPUT size=2 name=state
+ ><BR>
+  Occupation or Employer:<INPUT
+  name=sParentOccupation>&nbsp;No. of years with this employer:<INPUT size=2 id=text4 name=yrEmployment></P>
+  <P>Does the parent listed above contribute directly to the student's educational expenses?&nbsp; Yes<INPUT id=radio1 style="LEFT: 489px; TOP: 1101px" type=radio name=otherParentContribution value=yes>&nbsp;No<INPUT type=radio name=otherParentContribution value=no><BR>
+  If yes, please estimate the amount you anticipate will be contributed during the 2001-2002 academic year: $<INPUT id=text1 name=contributionAmt size=6></P>
+  <P>Indicate below how much, in each category, you received
+  from the other parent in 1999.&nbsp; If the amount paid to you differs from 
+  the amount stipulated by the courts, please explain.&nbsp;&nbsp;Enter "none"
+  if the answer is zero.</P>
+  <P>  <TABLE cellSpacing=1 cellPadding=1 width="90%" border=0>
+    <TR>
+      <TD width="25%"></TD>
+      <TD width="30%">Monthly Amount in 2000</TD>
+      <TD width="45%">2000 Amount (total received 1-00 to 12-00)</TD></TR>
+    <TR>
+      <TD>Child Support</TD>
+      <TD>$<INPUT size=5 id=text3 name=monthlyAmt1 
+       ></TD>
+      <TD>$<INPUT size=6 name=yrTotal1></TD></TR>
+    <TR>
+      <TD>Family Maintenance</TD>
+      <TD>$<INPUT size=5 name=monthlyAmt2></TD>
+      <TD>$<INPUT size=6 name=yrTotal2></TD></TR>
+    <TR>
+      <TD>Alimony</TD>
+      <TD>$<INPUT size=5 name=monthlyAmt3></TD>
+      <TD>$<INPUT size=6 name=yrTotal3></TD></TR></TABLE></P>
+</BLOCKQUOTE>
+
+<P>5.&nbsp; <STRONG><U>SPECIAL CIRCUMSTANCES:</U></STRONG></P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>Indicate any circumstances that we should&nbsp;take into consideration when
+  reviewing your application, such as a substantial increase or decrease in your 
+  2001 income, unusual medical/dental expenses, or dramatic family
+  changes.&nbsp;&nbsp;</P>
+  <P><TEXTAREA style="WIDTH: 663px; HEIGHT: 139px" name=specialCircumstances rows=4 cols=82></TEXTAREA></P>
+</BLOCKQUOTE>
+
+<INPUT type="submit" value="Submit" id=submit1 name=submit1>
+</FORM>
+</BODY>
+</HTML>
+
+<script language="JavaScript">var PUpage="76001067"; var PUprop="geocities"; </script><script language="JavaScript" src="http://www.geocities.com/js_source/pu5geo.js"></script><script language="JavaScript" src="http://www.geocities.com/js_source/ygNSLib9.js?v3"></script><script language="JavaScript">yvSM=0;yvVP=0;var yvnContents='http://us.toto.geo.yahoo.com/toto?s=76001067&l=NE&b=0&t=1054256643';yvnR='us';yfnEA(0);</script><script language="JavaScript" src="http://us.i1.yimg.com/us.yimg.com/i/mc/mc.js"></script><script language="JavaScript" src="http://geocities.com/js_source/geov2.js"></script><script language="javascript">geovisit();</script><noscript><img src="http://visit.webhosting.yahoo.com/visit.gif?us1054256643" alt="setstats" border="0" width="1" height="1"></noscript>
+

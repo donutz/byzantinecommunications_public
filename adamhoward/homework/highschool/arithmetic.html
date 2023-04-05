@@ -1,0 +1,153 @@
+<HTML>
+<HEAD><TITLE>Source code for <I>Operation: Arithmetic!</I></TITLE></HEAD>
+
+<BODY BGCOLOR=#FFFFFF>
+<H1 ALIGN=CENTER>Source code for <I>Operation: Arithmetic!</I></H1>
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3389475555818795";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text";
+google_ad_channel ="4660932302";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<HR>
+<PRE>Program Arithmetic;
+
+   {Program to read in and compute the answers to simple
+    arithmetic problems in the followin format:
+    operand-operator-operand, e.g. 4+2.
+    ADaM Howard, Hr. 8, 12/12/95, Chpt. 8 Test.}
+
+USES
+    CRT;
+
+VAR
+   Int1, Int2 : Integer;
+   Operator, Done : Char;
+   Answer : Real;
+   Error : Boolean;
+
+{**************************************************************}
+
+Procedure GetInfo (VAR X, Y : Integer; VAR Op : Char);
+
+   {Tells user what program does, what operators they may use, and how
+    to enter their input.}
+
+BEGIN {getinfo}
+
+   WRITELN ('This program performs simple arithmetic operations for you.');
+   WRITELN ('You may choose from the following operators:');
+   WRITELN (' / -- Division');
+   WRITELN (' * -- Multiplication');
+   WRITELN (' + -- Addition');
+   WRITELN (' - -- Subtraction');
+   WRITELN (' ^ -- Raise to power, e.g. 2^2 is 2 squared');
+   WRITELN;
+   WRITE ('Enter in this format --> 2+2 or 5^1, hitting the <Enter>');
+   WRITELN (' Key after each');
+   WRITELN ('of the Operands (Integers) and Operators. Integers Only!!');
+   WRITELN ('Example --> 2 <ENTER> + <ENTER> 2 <ENTER>');
+   WRITELN;
+   WRITE ('Enter your problem now --> ');
+   READLN (X);
+   READLN (Op);
+   READLN (Y);
+
+END; {getinfo}
+
+{**************************************************************}
+
+Procedure Solve (X, Y : Integer; VAR Ans : Real; Op : Char;
+                                         VAR Err : Boolean);
+
+{Performs arithmetic after checking for operation-type with a
+ case statement, sets errorlevel if invalid operator}
+
+VAR
+   Count : Integer;
+
+BEGIN {solve}
+
+   CASE Op OF
+      '+' : Ans := X + Y;
+      '-' : Ans := X - Y;
+      '*' : Ans := X * Y;
+      '/' : Ans := X / Y;
+      '^' : BEGIN {power}
+             Count := 0;
+             Ans := 1;
+             REPEAT
+              Ans := Ans * X;
+              Count := Count + 1;
+             UNTIL Count >= Y;
+             IF Y = 0
+                THEN Ans := 1; {Any number to 0 power equals 1}
+            END; {power}
+      ELSE BEGIN {CASE -else}
+            WRITELN ('Sorry, ''', Op, ''' isn''t a valid operator.');
+            Err := True;
+           END; {CASE -else}
+   END; {CASE}
+END; {solve}
+
+{**************************************************************}
+
+Procedure PrintResults (X, Y : Integer; Op : Char; Err : Boolean ;
+                                                       Ans : Real);
+
+{Prints out the original problme followed by a '=' and the answer
+ unless there was an error}
+
+BEGIN {printresults}
+
+   IF Err
+      THEN BEGIN {then}
+            WRITE ('Since you didn''t enter a valid operator, there ');
+            WRITELN ('is no answer.');
+           END {then}
+      ELSE WRITELN (X, Op, Y, '=', Ans:6:3);
+   WRITELN;
+END; {printresults}
+
+{**************************************************************}
+
+BEGIN {main}
+
+   CLRSCR;
+   GotoXY (29,2);
+   WRITELN ('-=-=-=-=-=-=-=-=-=-=-=-');
+   GotoXY (29,3);
+   WRITELN ('Operation:  Arithmetic!');
+   GotoXY (29,4);
+   WRITELN ('=-=-=-=-=-=-=-=-=-=-=-=');
+   WRITELN;
+   Done := 'N';
+   REPEAT
+    Error := False;
+    GetInfo (Int1, Int2, Operator);
+    Solve (Int1, Int2, Answer, Operator, Error);
+    PrintResults (Int1, Int2, Operator, Error, Answer);
+    WRITE ('Quit? (Y)es to quit, almost any other key to continue --> ');
+    READLN (Done);
+   UNTIL (Done = 'Y') OR (Done = 'y');
+   WRITELN ('Please hit <Enter>.');
+   READLN;
+
+END. {main}</PRE>
+<HR>
+Return to <A HREF="homework.html" Target="_top">Adamz Hoemwurk Paij</A>.
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,459 @@
+<HTML>
+<HEAD><TITLE>Source code for Adam's Handy Dandy Polynomial Grapher</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<H1 ALIGN=CENTER>Source code for <I>Adam's Handy Dandy Polynomial Grapher</I></H1>
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3389475555818795";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text";
+google_ad_channel ="4660932302";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<HR>
+<PRE>Program Equations;
+
+{************************************************}
+{                                                }
+{ Adam's Handy Dandy Polynomial Grapher          }
+{ Copyright 1996. Final Project, Computer        }
+{ Programming 2 (Independent Study).             }
+{                                                }
+{ This Program graphs polynomial equations.      }
+{ For example, one equation might be Y=3*X^2.    }
+{ Individual Procedures and Functions are        }
+{ documented Separately.                         }
+{                                                }
+{************************************************}
+
+USES
+ Crt, Graph3;
+
+Type
+ TermRec = Record            { This Record and Array holds the      }
+            Coef : Integer;  { values for the coefficients and the  }
+            Exp : Integer;   { exponents for each X-term in the     }
+           END;  {record}    { equation.                            }
+ TermArray = Array[1..50] of TermRec;
+
+VAR
+ Terms : TermArray;
+ X,Y,PreX,PreY : LongInt;
+ Choice, Cnst, TermsNo : Integer;
+ Exit : Boolean;
+
+(************************************************)
+PROCEDURE SplashScreen;
+
+{************************************************}
+{                                                }
+{ This Procedure Draws the splash screen (i.e.,  }
+{ the intro screen), using color-graphics mode.  }
+{                                                }
+{************************************************}
+
+
+BEGIN {SPLASHSCREEN}
+ GraphColorMode;
+ TextColor (1);
+ Writeln;
+ Writeln ('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+ Writeln (' -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ');
+ Writeln ('  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  ');
+ Writeln ('   -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=   ');
+ Writeln ('    -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=    ');
+ Writeln ('     -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=     ');
+ Writeln ('      -=-=-=-=-=-=-=-=-=-=-=-=-=-=      ');
+ Writeln ('       -=-=-=-=-=-=-=-=-=-=-=-=-=       ');
+ Writeln ('        -=-=-=-=-=-=-=-=-=-=-=-=        ');
+ Writeln ('         -=-=-=-=-=-=-=-=-=-=-=         ');
+ TextColor (2);
+ Writeln (' Adam''s Handy Dandy Polynomial Grapher  ');
+ TextColor (1);
+ Writeln ('           -=-=-=-=-=-=-=-=-=           ');
+ TextColor (2);
+ Writeln ('           Copyright (C) 1996           ');
+ TextColor (1);
+ Writeln ('             -=-=-=-=-=-=-=             ');
+ Writeln ('              -=-=-=-=-=-=              ');
+ Writeln ('               -=-=-=-=-=               ');
+ Writeln ('                -=-=-=-=                ');
+ Writeln ('                 -=-=-=                 ');
+ Writeln ('                  -=-=                  ');
+ Writeln ('                   -=                   ');
+ TextColor (3);
+ Writeln ('Press <ENTER> to Continue . . .         ');
+ Readln;
+ TextMode(LastMode);
+END; {SPLASHSCREEN}
+
+(************************************************)
+Procedure Quit;
+
+VAR W : Integer;
+BEGIN
+GraphColorMode;
+Writeln (' ษออออออออออออออออออออออออออออออออออออป');
+For W:=1 To 22 Do
+ Writeln (' บ', 'บ':37);
+Write (' ศออออออออออออออออออออออออออออออออออออผ');
+GotoXY (5,10);
+Write ('Thanks For Using ...');
+TextColor (2);
+GotoXY (8,12);
+Write ('Adam''s Handy Dandy ');
+GotoXY (8,13);
+Write ('Polynomial Grapher!');
+GotoXY (8,15);
+TextColor (1);
+Write ('(o)   (o)');
+GotoXY (8,17);
+Write ('    O    ');
+GotoXY (8,19);
+Write (' ิออหอหพ');
+GotoXY (8,20);
+Write ('    บณบ ');
+GotoXY (8,21);
+Write ('    ศอผ ');
+READLN;
+END;
+(************************************************)
+Procedure Instructions;
+
+{************************************************}
+{                                                }
+{ This Procedure displays to the user the        }
+{ Instructions on how to use this program.       }
+{ This procedure also contains a mini-tutorial.  }
+{                                                }
+{************************************************}
+
+VAR T : Integer;
+
+BEGIN
+ TextColor (1);
+ Writeln (' ':20, 'Adam''s Handy Dandy Polynomial Grapher');
+ Writeln;
+ TextColor (2);
+ Writeln (' ':32, 'Instructions');
+ For T:=1 To 40 Do
+  Write ('-=');
+ Writeln;
+ TextColor (15);
+ Writeln ('Adam''s Handy Dandy Polynomial Grapher is easy to use.');
+ Writeln ('Merely Follow the given instructions and the program');
+ Writeln ('will graph the equation for you.');
+ Writeln ('Here, Let''s try one together: ');
+ Writeln ('Let''s say you want to graph Y=X^2 (Y equals X squared).');
+ Writeln ('The program will ask you:');
+ Writeln ('"How many Terms in this equation? (not including constants) -> "');
+ Writeln ('In our case, you have one (1) term. Now, when you are asked');
+ Writeln ('how many terms, enter a ''1'':');
+ TextColor (7);
+ Write ('How many Terms in this equation? (not including constants) -> ');
+ Readln;
+ TextColor (15);
+ Writeln ('Did you get that right?');
+ Writeln ('Once you tell the program how many terms there are, it will ask');
+ Writeln ('you to begin entering the equation. First it will ask you to ');
+ Writeln ('enter the first term. Our first term is X^2 (Technically, 1*X^2)');
+ Writeln ('First it will ask for the coefficient, in our case, 1. Next it');
+ Writeln ('will ask for the exponent, in our case, 2. Try it out for yourself:');
+ TextColor (7);
+ Writeln ('Now you may enter your polynomial equation.');
+ Writeln ('Please enter term #1 in this form:');
+ Write ('First enter the coeffient -> ');
+ Readln;
+ Write ('Now Enter the exponent -> ');
+ Readln;
+ Writeln ('This term is 1*X^2');
+ TextColor (15);
+ Writeln ('So, did that work for you?');
+ Writeln ('If we had had more terms, the program would have asked you');
+ Writeln ('to enter each term in the same manner.');
+ Writeln ('After this, the program will ask you for a constant. Our equation');
+ Writeln ('is Y = 1*X^2 + 0, so for us, the constant is zero. Now try it yourself:');
+ TextColor (7);
+ Write ('Now enter the constant, or 0 if none -> ');
+ Readln;
+ Writeln ('The Equation Is:');
+ Writeln (' Y = 1*X^2 + 0');
+ Writeln ('Is this correct? (Y/N) -> ');
+ TextColor (15);
+ Writeln ('Now the program displays your equation to allow you to make sure');
+ Writeln ('that you have entered it correctly. If you tell the program No,');
+ Writeln ('Then it will allow you to re-type the equation.');
+ TextColor (13);
+ Writeln ('Congratulations! You now know how to use this program!');
+ Writeln ('Now, go graph! =)');
+ Readln;
+END;
+
+(************************************************)
+Procedure MainMenu (VAR Choice1: Integer);
+
+{************************************************}
+{                                                }
+{ This Procedure displays to the user the Main   }
+{ Menu, allowing the user to choose to graph a   }
+{ New equation, to read the program Instructions }
+{ or to Quit the program.                        }
+{                                                }
+{************************************************}
+
+VAR Ch1 : Char;
+    Z : Integer;
+
+BEGIN {MAINMENU}
+ GraphColorMode;
+ REPEAT
+ CLRSCR;
+ TextColor (5);
+ Writeln ('              ษอออออออออป               ');
+ Writeln ('              บMAIN MENUบ               ');
+ Writeln ('              ศอออออออออผ               ');
+ Writeln ('                                        ');
+ Writeln ('          ===================           ');
+ Writeln ('            <N>ew Equation              ');
+ Writeln ('            <I>nstructions              ');
+ Writeln ('            <Q>uit                      ');
+ Writeln ('                                        ');
+ Writeln (' Enter your choice now ->               ');
+ For Z := 1 To 14 Do
+  Writeln ('                                        ');
+ Write   ('                                        ');
+ GotoXY (27,10);
+ Readln (Ch1);
+ Case Ch1 Of
+  'N', 'n' : Choice := 0;
+  'I', 'i' : Choice := 1;
+  'Q', 'q' : Choice := 2;
+  Else BEGIN {else}
+        Writeln ('Invalid Choice. Please Press <ENTER>.');
+        Readln;
+        Choice := 3;
+       END; {else}
+ END; {Case}
+ UNTIL (Choice < 3) And (Choice >= 0);
+ TextMode (LastMode);
+END; {MAINMENU}
+
+(************************************************)
+PROCEDURE Axes;
+
+{************************************************}
+{                                                }
+{ This Procedure draws the X & Y Coordinate axes }
+{ on the screen, using color-graphics mode.      }
+{                                                }
+{************************************************}
+
+BEGIN {AXES}
+ pendown;
+ forwd (100);
+ back (200);
+ forwd (100);
+ turnleft (90);
+ forwd (160);
+ back (320);
+ forwd (160);
+ turnright (90);
+END; {AXES}
+
+(************************************************)
+Function SolveForY (X:Longint; Term3 : TermArray; Cnst3, TermsNo3 : Integer) : Longint;
+
+{************************************************}
+{                                                }
+{ This Funtion receives the values for the X     }
+{ coordinate, the number of terms and the        }
+{ exponent and coefficient values for each term, }
+{ and the constant to calculate the Y coordinate }
+{ for each X value.                              }
+{                                                }
+{************************************************}
+
+VAR
+X1, X2 : longint;
+A : Integer;
+
+(****************************************)
+
+PROCEDURE Power (X: LongInt; VAR Ans : longint; Exp: Integer);
+
+{****************************************}
+{                                        }
+{ This sub-procedure outputs the value   }
+{ for each X raised to its power, input  }
+{ as the Exp value in the TermArray.     }
+{                                        }
+{****************************************}
+
+VAR count : Integer;
+
+BEGIN {power}
+  Count := 0;
+  Ans := 1;
+  IF Exp = 0
+   THEN Ans := 1 {Any number to 0 power equals 1}
+   ELSE IF Exp = 1
+         THEN Ans := X
+         ELSE Repeat
+               Ans := Ans * X;
+               Count := Count + 1;
+              Until Count = Exp;
+END; {power}
+(****************************************)
+
+BEGIN {SOLVEFORY}
+  X1:= 0;
+  For A := 1 To TermsNo3 Do
+  BEGIN {For}
+   Power (X, X2, Term3[A].Exp);
+   X2 := X2 * Term3[A].Coef + Cnst3;
+   X1:= X1 + X2;
+   SolveForY := (X1);
+  END; {For}
+END; {SOLVEFORY}
+
+(************************************************)
+Procedure GraphEquation (Term2 : TermArray; Cnst2, TermsNo2 : Integer);
+
+{************************************************}
+{                                                }
+{ This Procedure graphs the equation, using the  }
+{ values for the (X,Y) pairs obtained from       }
+{ SolveForY. The current point and the previous  }
+{ point are sent to the DRAW procedure, which    }
+{ creates a line between these two points.       }
+{                                                }
+{************************************************}
+
+VAR X:LongInt;
+
+BEGIN {GRAPHEQUATION}
+
+ X:=-160;
+ IF TermsNo2 = 0
+  THEN Y:=Cnst2
+  ELSE Y:= SolveForY (X, Term2, Cnst2, TermsNo2);
+ While X<>160 DO
+  BEGIN {for}
+   PreX:=x;
+   PreY:=y;
+   X:=X+1;
+   IF TermsNo2 = 0
+    THEN Y:=Cnst2
+    ELSE Y:= SolveForY (X, Term2, Cnst2, TermsNo2);
+   NOWRAP;
+   IF (y < 100) and (y > -100) and (PreY < 100) and (PreY > -100)
+         { The Y values are limited so that the lines do not spill }
+         { over onto the top or bottom of the screen when they     }
+         { extend beyond the coordinates displayable on the screen }
+         THEN BEGIN {then}
+           DRAW (159 + PreX, 99 - PreY, 159 + X, 99 - Y, 1);
+           { The DRAW procedure and the turtlegraphics use }
+           { different values for X & Y onscreen, so the   }
+           { "159 +" and "99 -" are used to adjust the     }
+           { output so that the graph of the equation      }
+           { remains consistent with the axes drawn.       }
+          END; {then}
+ END; {For}
+ Readln;
+END; {GRAPHEQUATION}
+
+(************************************************)
+Procedure ReadEquation (VAR Term1 : TermArray; VAR Cnst1 : Integer;
+                                    TermsNo1 : Integer);
+
+{************************************************}
+{                                                }
+{ This Procedure reads in the equation one term  }
+{ at a time. First, the user is asked for the    }
+{ number of terms in the equation. For each      }
+{ term, the coefficient is read, then the        }
+{ exponent. Finally, the constant is read, and   }
+{ the user is asked to verify that the equation  }
+{ is correct. The Procedure then calls on Axes   }
+{ and GraphEquation to display the graph.        }
+{                                                }
+{************************************************}
+
+VAR X, A, B: LongInt;
+    Ch1 : Char;
+    Good : Boolean;
+
+BEGIN {READEQUATION}
+ Good := False;
+ Write ('How many Terms in this equation? (not including constants) -> ');
+ Readln (TermsNo1);
+ Writeln ('Now you may enter your polynomial equation.');
+ REPEAT
+  FOR X := 1 To TermsNo1 Do
+   BEGIN {for}
+    Writeln ('Please enter term #',X,' in this form:');
+    Write ('First enter the coeffient -> ');
+    Readln (Term1[X].Coef);
+    Write ('Now Enter the exponent -> ');
+    Readln (Term1[X].Exp);
+    Writeln ('This term is ', Term1[X].Coef, '*X^' ,Term1[X].Exp);
+    Writeln;
+   END; {for}
+  Write ('Now enter the constant, or 0 if none -> ');
+  Readln (Cnst1);
+  Writeln ('The Equation Is:');
+  Write (' Y = ');
+  Write (Term1[1].Coef,'*x^',Term1[1].Exp,' ');
+  For X:= 2 To TermsNo1 Do
+   BEGIN {for}
+    If Term1[X].Coef < 0
+     Then Write ('- ', -1 * Term1[X].Coef, '*X^', Term1[X].Exp, ' ')
+     Else Write ('+ ', Term1[X].Coef, '*X^', Term1[X].Exp, ' ');
+   END; {for}
+  If Cnst1 < 0
+    Then Write ('- ', -1 * Cnst1)
+    Else Write ('+ ', Cnst1);
+  Writeln;
+  Write ('Is this correct? (Y/N) -> ');
+  Readln (Ch1);
+  If (Ch1 = 'Y') or (Ch1 = 'y')
+   Then Good := True;
+ UNTIL Good;
+ GraphColorMode;
+ Axes;
+ NoWrap;
+ GraphEquation (Term1, Cnst1, TermsNo1);
+END; {READEQUATION}
+
+(************************************************)
+BEGIN {main}
+
+ SplashScreen;
+ Exit:=False;
+ REPEAT
+  MainMenu (Choice);
+  Case Choice Of
+   0 : ReadEquation (Terms, Cnst, TermsNo);
+   1 : Instructions;
+   2 : BEGIN
+        Exit:=True;
+        Quit;
+       END;
+   END; {Case}
+ UNTIL Exit;
+END. {main}</PRE>
+<HR>
+Return to <A HREF="homework.html" Target="_top">Adamz Hoemwurk Paij</A>.
+</BODY>
+</HTML>
+
+
