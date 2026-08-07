@@ -1,8 +1,16 @@
-<HTML>
-<HEAD><TITLE>Source code for <I>Operation: Arithmetic!</I></TITLE></HEAD>
+<html>
+<head><!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-TEVXM53NBL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<BODY BGCOLOR=#FFFFFF>
-<H1 ALIGN=CENTER>Source code for <I>Operation: Arithmetic!</I></H1>
+  gtag('config', 'G-TEVXM53NBL');
+</script>
+<title>Source code for <i>Operation: Arithmetic!</i></title></head>
+<body bgcolor="#FFFFFF">
+<h1 align="CENTER">Source code for <i>Operation: Arithmetic!</i></h1>
 <div align="center">
 <script type="text/javascript"><!--
 google_ad_client = "pub-3389475555818795";
@@ -17,11 +25,10 @@ google_color_link = "0000FF";
 google_color_url = "008000";
 google_color_text = "000000";
 //--></script>
-<script type="text/javascript"
-  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+<script src="http://pagead2.googlesyndication.com/pagead/show_ads.js" type="text/javascript">
 </script></div>
-<HR>
-<PRE>Program Arithmetic;
+<hr/>
+<pre>Program Arithmetic;
 
    {Program to read in and compute the answers to simple
     arithmetic problems in the followin format:
@@ -54,12 +61,12 @@ BEGIN {getinfo}
    WRITELN (' - -- Subtraction');
    WRITELN (' ^ -- Raise to power, e.g. 2^2 is 2 squared');
    WRITELN;
-   WRITE ('Enter in this format --> 2+2 or 5^1, hitting the <Enter>');
+   WRITE ('Enter in this format --&gt; 2+2 or 5^1, hitting the <enter>');
    WRITELN (' Key after each');
    WRITELN ('of the Operands (Integers) and Operators. Integers Only!!');
-   WRITELN ('Example --> 2 <ENTER> + <ENTER> 2 <ENTER>');
+   WRITELN ('Example --&gt; 2 <enter> + <enter> 2 <enter>');
    WRITELN;
-   WRITE ('Enter your problem now --> ');
+   WRITE ('Enter your problem now --&gt; ');
    READLN (X);
    READLN (Op);
    READLN (Y);
@@ -90,7 +97,7 @@ BEGIN {solve}
              REPEAT
               Ans := Ans * X;
               Count := Count + 1;
-             UNTIL Count >= Y;
+             UNTIL Count &gt;= Y;
              IF Y = 0
                 THEN Ans := 1; {Any number to 0 power equals 1}
             END; {power}
@@ -138,16 +145,14 @@ BEGIN {main}
     GetInfo (Int1, Int2, Operator);
     Solve (Int1, Int2, Answer, Operator, Error);
     PrintResults (Int1, Int2, Operator, Error, Answer);
-    WRITE ('Quit? (Y)es to quit, almost any other key to continue --> ');
+    WRITE ('Quit? (Y)es to quit, almost any other key to continue --&gt; ');
     READLN (Done);
    UNTIL (Done = 'Y') OR (Done = 'y');
-   WRITELN ('Please hit <Enter>.');
+   WRITELN ('Please hit <enter>.');
    READLN;
 
-END. {main}</PRE>
-<HR>
-Return to <A HREF="homework.html" Target="_top">Adamz Hoemwurk Paij</A>.
-</BODY>
-</HTML>
-
-
+END. {main}</enter></enter></enter></enter></enter></pre>
+<hr/>
+Return to <a href="homework.html" target="_top">Adamz Hoemwurk Paij</a>.
+</body>
+</html>

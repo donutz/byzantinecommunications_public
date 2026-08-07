@@ -2,11 +2,21 @@
 <!DOCTYPE html 
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-   <link rel="stylesheet" type="text/css" href="../donutz.css" />
-   <title>Financial Aid Office Case Study</title>
-   <style type="text/css">
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head><!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-TEVXM53NBL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TEVXM53NBL');
+</script>
+
+<link href="../donutz.css" rel="stylesheet" type="text/css"/>
+<title>Financial Aid Office Case Study</title>
+<style type="text/css">
       body {
 	  color: #000000;
 	  background-color: #FFFFFF;
@@ -16,32 +26,23 @@
    </style>
 </head>
 <body>
-
-<h1>IS-365 Fall 2000<br />Financial Aid Office Case Study</h1>
-
-<p class="center">Derek Bobbe<br />
-Shuk-Yin "Fion" Choi<br />
-Adam Howard<br />
+<h1>IS-365 Fall 2000<br/>Financial Aid Office Case Study</h1>
+<p class="center">Derek Bobbe<br/>
+Shuk-Yin "Fion" Choi<br/>
+Adam Howard<br/>
 Mark Riley </p>
-
 <h2>Project Responsibilities:</h2>
-
 <p>Adam: Project Motivation; Architectural Specifications; Operational
 Planning</p>
-
 <p>Fion: Cover Page; Economic Aspects; Implementation Details;
 Final Recommendations and Conclusion (Review)</p>
-
 <p>Derek: Abstract; Table of Contents; Scope of Business Case; Background
 of FA Office; Justifying the Strategic Investment; Vendor and Service
 Provider; Technology and Equipment (Server software)</p>
-
 <p>Mark: Competitive Advantage; Outsourcing vs. In-house; Technology and
 Equipment (Server Hardware and Configuration); Final Recommendations and
 Conclusion  (Summary of Recommendation)</p>
-
 <h2>Abstract</h2>
-
 <p>After a thorough study of the business environment surrounding the UW
 Financial Aid Office, we compiled the following document providing an
 informative explanation of requirements surrounding additional web
@@ -58,7 +59,6 @@ current networking structure, a PVC of 100MB, should be sufficient to
 cover requirements; however, an additional allocation of optional SVC
 may be appropriate during the busiest time of the Financial Aid
 annum.</p>
-
 <p>This project was ultimately a valuable learning experience because it
 created in us a sensitivity to the numerous considerations that one must
 undertake before implementing a web solution.  The size, stability, and
@@ -66,11 +66,8 @@ flexibility of the network are especially important when considering a
 secure, customer-oriented system like the one we chose to implement at
 the Financial Aid Office.  This stability depends on a number of
 disparate factors, which we explore in the following pages.</p>
-
 <h2>Introduction</h2>
-
 <h3>Scope of the Business Case</h3>
-	
 <p>In order to provide the Financial Aid office with the most relevant
 and useful technological solutions, we met with both the lead functional and
 technical Information Technology personnel for the office.  During our
@@ -81,7 +78,6 @@ process of developing an interactive web page that will allow students
 to view their grants and aid online and decide which portions of the aid
 they will either accept or decline.  The web page will be placed on the
 Financial Aid website.</p>
-
 <p>In addition to the current project discussed above, our group decided
 to focus on making two additional forms interactive as well as providing
 an online help system for students filling out one of all of the three
@@ -92,7 +88,6 @@ to current E-Commerce and E-Business models and will aim to provide
 students with timely, relevant assistance while balancing these customer
 needs with the number of skilled hours that must be spent maintaining
 the website.</p>
-
 <p>By making all but the federal tax forms interactive, our business
 model
 will aim to effectively eliminate thousands of dollars in annual costs
@@ -100,9 +95,7 @@ due to mailings and human hours.  The online help system will be
 especially effective in answering the common financial aid questions of
 students before they are brought to skilled, busy financial aid
 representatives.</p>
-
 <h3>Background of the UW Financial Aid Office</h3>
-
 <p>During the past ten years, the U.S. level of inflation has been
 extraordinarily low.  However, due to a changing international economy
 that demands highly-skilled, well-educated, and culturally sensitive
@@ -113,7 +106,6 @@ their college educations, financial aid offices are become increasingly
 important to the effective distribution of grants, scholarships, and
 loans to those who are in need of monetary assistance for the completion
 of the respective programs.</p>
-
 <p>Each year, the University of Wisconsin-Madison Financial Aid Office
 assists over 18,000 graduate and undergraduate students to finance their
 college expenditures.  The primary duties of the Financial Aid Office
@@ -125,7 +117,6 @@ these primary duties, the aid office also works together with a number
 of different financial institutions in order to ensure that students
 have available venues to receive federally subsidized and/or
 unsubsidized loans.</p>
-
 <p>In order to determine each individual student's financial need, the
 Financial Aid Office must request and store a large amount of student
 data.  Up until 1998, they used a legacy system and mainframe database
@@ -140,23 +131,16 @@ data throughout the campus (i.e. bursar's office, colleges and schools
 of the university, registrar's office, etc.).  The office currently has
 one full-time IT employees as well as two additional DoIT consultants
 working on their systems.</p>
-
 <p>Due to the fact that the Financial Aid office is located at the heart
 of campus, they already have access to very high-speed networking
 infrastructure.  Their current available bandwidth is 100MB per second
 -- a significant portion of this bandwidth is still available for future
 uses.</p>
-
-<div class="center"><img src="splitarrow.png" alt="[diverging arrows]" /></div>
-
+<div class="center"><img alt="[diverging arrows]" src="splitarrow.png"/></div>
 <p>The following flow diagram was constructed in order to illustrate a
 high-level understanding of the financial aid process:</p>
-
-<div class="center"><img src="aid_flowchart.png" alt="[Financial Aid flowchart]" /></div>
-
-
+<div class="center"><img alt="[Financial Aid flowchart]" src="aid_flowchart.png"/></div>
 <h3>Project Motivation</h3>
-
 <p>What is most interesting about our work is that we are working to
 help
 e-enable this university's financial aid office. With the financial aid
@@ -164,7 +148,6 @@ process streamlined and online, students will better be able to track
 their financial aid information, and update that information in just
 minutes, compared to days or weeks by mail. This should appeal to
 today's typical computer-savvy college students.</p>
-
 <p>Since the infrastructure for enabling this process is largely in
 place
 already, with connectivity through the campus LAN, the majority of the
@@ -172,9 +155,7 @@ cost of this project is already taken care of, so that aside from the
 purchase of a server computer, the financial aid office can focus on the
 higher-level aspects of this project, rather than spend a lot of time on
 budgetary concerns.</p>
-
 <h2>Body</h2>
-
 <p>Instead of organization this discussion around a specific business
 plan
 to help the UW Financial Aid Office implement their new system, we
@@ -183,9 +164,7 @@ financial feasibility of the web project.  In effect, the first six
 sections of the body discuss these broad areas while the seventh section
 is used to discuss the actual details of the ASP and HTML code which we
 have proposed for the implementation of the new web forms.</p>
-
 <h3>Justifying The Strategic Investment</h3>
-
 <p>When applying a financial analysis to any business project, one must
 first estimate a project's economic outflows and inflows before applying
 the appropriate financial methodologies.  In the case of the Financial
@@ -193,14 +172,11 @@ Aid Office, the calculation of estimated outflows is very much dependent
 upon whether or not a new employee must be temporarily hired in order to
 assist in the support of the additional technological capabilities of
 the organization.</p>
-
 <p>The current functional lead of the UW Financial Aid Office does not
 foresee the need for the hiring of a new full-time employee for the
 purposes of the additional proposed functionalities.  However, she
 admits that there will probably additional system complexities that may
 warrant the need for temporary help.</p>
-
-
 <p>Because it is unclear whether or not temporary help will be hired for
 back-end technical assistance, we used two different financial
 models -- the first assumes that additional help will not be needed and
@@ -208,7 +184,6 @@ the second assumes that additional help will be needed for two years.
 In this way, when the Financial Aid Office has a clearer picture of the
 necessary work hours, they can make a comparison between financial
 models and make a more informed decision.</p>
-	
 <p>Both models will employ the same methodologies for the project.  The
 first methodology that will be applied is the "Net Present Value" or
 NPV.  Using the estimated inflows and outflows, NPV measures the current
@@ -220,8 +195,7 @@ and is used to state the rate of wealth creation that occurs during the
 course of a given project.  If the IRR exceeds the current market rate
 of interest, then a project is assumed to be profitable and should
 theoretically be undertaken.</p>
-
-<div class="center">Financial Model #1 (no additional employees)<br />
+<div class="center">Financial Model #1 (no additional employees)<br/>
 <table class="border">
 <tr><th colspan="5">Economic Outflows ($)</th></tr>
 <tr><th>#</th><th>Type</th><th>Periodicity</th><th>Units x Cost/Unit</th><th>Cost</th></tr>
@@ -230,7 +204,6 @@ theoretically be undertaken.</p>
 <tr><td colspan="4">Total Initial Outflows:</td><td>$3,000</td></tr>
 <tr><td colspan="4">Total Yearly Outflows:</td><td>$1,500</td></tr>
 </table></div>
-
 <div class="center">
 <table class="border">
 <tr><th colspan="5">Economic Inflows ($)</th></tr>
@@ -242,7 +215,6 @@ theoretically be undertaken.</p>
 <tr><td colspan="4">Total Yearly Inflows:</td><td>$18,876</td></tr>
 <tr><td colspan="4">Net Yearly Inflows:</td><td>$17,376</td></tr>
 </table></div>
-
 <table class="border">
 <tr><th>Financial Methodology</th><th>Years</th><th>Interest Rate</th><th>Result</th></tr>
 <tr><td>Net Present Value</td><td>5</td><td>4</td><td>$74,354.86</td></tr>
@@ -252,8 +224,6 @@ theoretically be undertaken.</p>
 <tr><td>Internal Rate of Return</td><td>5</td><td>N/A</td><td>579.15%</td></tr>
 <tr><td>Internal Rate of Return</td><td>10</td><td>N/A</td><td>570.2%</td></tr>
 </table>
-
-
 <p>Assuming the aforementioned cash flows, one can see that the automation
 of financial aid project is profitable according to both the NPV and IRR
 methods.  However, it is important to note that these numbers are highly
@@ -261,8 +231,7 @@ dependent on the assumption that the Financial Aid Office will no longer
 need to send out hard copy mailings.  In addition, one must also note
 that the IRR is extraordinarily high due to the fact that there is a
 very small initial investment in this particular case.</p>
-
-<div class="center">Financial Model #2 (one additional temporary employee)<br />
+<div class="center">Financial Model #2 (one additional temporary employee)<br/>
 <table class="border">
 <tr><th colspan="5">Economic Outflows ($)</th></tr>
 <tr><th>#</th><th>Type</th><th>Periodicity</th><th>Units X Cost/Unit</th><th>Cost</th></tr>
@@ -273,7 +242,6 @@ very small initial investment in this particular case.</p>
 <tr><td colspan="4">Total Yearly Outflows:</td><td>$1,500</td></tr>
 <tr><td colspan="4">Temporary Outflows</td><td>$104,000</td></tr>
 </table></div>
-
 <div class="center">
 <table class="border">
 <tr><th colspan="5">Economic Inflows ($)</th></tr>
@@ -285,7 +253,6 @@ very small initial investment in this particular case.</p>
 <tr><td colspan="4">Total Yearly Inflows:</td><td>$18,976</td></tr>
 <tr><td colspan="4">Total Net Inflows (not including initial salaries expense):</td><td>$17,776</td></tr>
 </table></div>
-
 <div class="center">
 <table class="border">
 <tr><th>Financial Methodology</th><th>Years</th><th>Interest Rate</th><th>Result</th></tr>
@@ -297,8 +264,6 @@ very small initial investment in this particular case.</p>
 <tr><td>Internal Rate of Return</td><td>10</td><td>N/A</td><td>(27.17%)</td></tr>
 </table>
 </div>
-
-
 <p>The results from the second case are radically different from the first
 case.  Clearly, the decision to hire a new worker in order to implement
 the new website will result in drastic financial results.  On the other
@@ -306,7 +271,6 @@ hand, the Financial Aid Office may decide that the intangible benefits
 gained from a new system (i.e. higher college rankings, increased
 quality of enrollees) may easily outweigh the costs associated with this
 new project.</p>
-
 <p><i>Disclaimer: It is important to note that there are additional factors to
 take into account beyond the traditional methodologies of NPV and IRR.
 In today's fast moving technological world, many businesses must
@@ -319,36 +283,29 @@ so, non-profit entities like the Financial Office must still consider
 obsolescence factors due to the fact that they are essentially competing
 versus financial aid offices of other institutions of higher education
 that compete against UW-Madison enrollment.</i></p>
-
 <h3>Competitive Advantage</h3>
-
 <p>Because the Financial Aid Department does not directly compete with
 other financial aid departments, it is hard to measure the competitive
 advantage of our proposed system.  Therefore our group will analyze how
 the Financial Aid Department's performance influences the competitive
 advantages of the University of Wisconsin-Madison as a whole.</p>
-
 <p>Universities throughout the country strive to recruit the best students.
 One of the tools used to raise students' interest in a school is the
 school's national placement.  The higher a school's ranking, the more of
 a competitive edge it has over other schools at attracting the best
 students.</p>
-
 <p><i>U.S. News &amp; World Report</i>, a weekly national newsmagazine,
 does the most famous ranking of colleges and universities in the United
 States.  Its "Best Values" survey ranks schools based on getting the
 most for your money. The following explanation of the ranking
 methodology used by <i>U.S. News &amp; World Report</i> is from the
-company's Web site at <a
-href="http://www.usnews.com/" target="_top">http://www.usnews.com/</a>.</p>
-
+company's Web site at <a href="http://www.usnews.com/" target="_top">http://www.usnews.com/</a>.</p>
 <p>To determine which schools offer families the best value, we use a
 formula that relates a school's academic quality, as indicated by its
 overall <i>U.S. News</i> ranking, to the net cost to a student who receives the
 average level of financial aid. The higher the quality of the school's
 academic program and the lower the cost to the student, the better the
 deal.</p>
-
 <p>These rankings were based on three variables:</p>
 <ul>
 <li>	Ratio of quality to price. A school's quality ranking -- its
@@ -364,7 +321,6 @@ the average need-based grant to undergraduates. In the case of public
 institutions, out-of-state tuition and the percentage of out-of-state
 students receiving grants meeting need were used.</li>
 </ul>
-
 <p>Overall rank was determined first by standardizing the scores achieved
 by every school in each of the three variables and weighting those
 scores. The first variable -- the ratio of quality to price -- accounted
@@ -374,14 +330,11 @@ average discount accounted for 15 percent. The weighted scores for each
 school were totaled. The school with the highest total weighted points
 became No. 1 in its category. Next, the score was converted to a
 percentile of 100.</p>
-
 <p>The scores for the other schools were then converted into a percentage
 of that achieved by the No. 1 school and the schools were ranked in
 descending order.</p>
-
 <p>As you can see, the amount of financial aid available to students is a
-major factor in determining a university's rank.  The <a
-href="http://www.wisc.edu" target="_top">University of
+major factor in determining a university's rank.  The <a href="http://www.wisc.edu" target="_top">University of
 Wisconsin-Madison</a>'s overall quality ranking by <i>U.S. News &amp;
 World Report</i> is a very reputable 35.  Furthermore, when compared
 only against public universities, our Wisconsin is ranked eighth!  On
@@ -396,15 +349,11 @@ freed capital could be directly applied to the financial aid reserves.
 Second, improved efficiency would create more opportunities to lobby the
 State of Wisconsin for more funding, and to solicit more donations from
 corporations and wealthy alumni.</p>
-
-
 <h3>Architectural Specifications</h3>
-
 <p>	The architecture selected for this project depends on several factors,
 including network traffic requirements, reliability requirements, and
 any project cost restraints. Meeting both of these constraints requires
 balancing expected results with what can be afforded.</p>
-
 <p>	The architecture appropriate for this project is largely dependant upon
 the amount of traffic that will be generated. The forms that we have
 proposed to put online will do not themselves contain large amounts of
@@ -419,12 +368,10 @@ for each student.  For most of the time, however, this server may be
 sitting idle, since most students take care of the financial aid forms
 during the same period, in order to be sure to receive their financial
 aid on time.</p>
-
 <p>	This web server could be required to function over a large range of
 traffic conditions, from small numbers of concurrent connections to
 possibly thousands of simultaneous connections, both to students' web
 browsers and to the backend database.</p>
-
 <p>To accommodate the high traffic situations would require a high-end
 server with fast components or several servers operating in a
 load-balancing fashion. To ensure that the web server performs reliably,
@@ -434,11 +381,9 @@ supply (UPS). A more costly option would be to have multiple systems
 running in parallel or load balanced fashion with separate network and
 power circuit connections, with one system able to take over should one
 fail.</p>
-
 <p>	Cost constraints limit the available options. Depending on the budget
 allotted for this project, the project may not be able to afford the
 biggest, fastest system.</p>
-
 <p>Various options exist that allow for different costs: choice of server
 hardware (processor type, amount of RAM, amount of RAID hard disc
 storage), choice of operating system (Unix vs. Microsoft Windows
@@ -451,7 +396,7 @@ connections (Figure A), they can send them out over a period of time, a
 week perhaps, to maintain a more reasonable number of concurrent
 connections (Figure B), rather than a sudden peak. 
 
-<img src="figures_ab.png" alt="[Figures A and B]" class="center" />
+<img alt="[Figures A and B]" class="center" src="figures_ab.png"/>
 
 This could allow the
 department to rely on only one server, rather than several load-balanced
@@ -463,10 +408,7 @@ powerful enough to run some of the busiest Internet sites, and both
 that OS and the web server are available for free. However, unless the
 department already has a qualified Unix system administrator, the
 additional costs of hiring someone may outweigh the cost savings.</p>
-
-
 <h3>Economic Aspects</h3>
-
 <p>	In addition to the aforementioned financial benefits of implementing a
 new web-based system, there are also a number of intangible economic
 benefits that will be improved in the Financial Aid Office should this
@@ -474,9 +416,7 @@ business plan be implemented.  In particular, this section will address
 the following non-monetary aspects that will result in intangible
 economic benefits: reduced processing time, increased customer
 convenience, and reduced errors.</p>
-
 <h4>Reduced processing time</h4>
-
 <p>By making the  "institutional" and "family information" forms online,
 the Financial Aid Office can eliminate the step of manually entering the
 information into the database.  Instead, the information will be readily
@@ -484,9 +424,7 @@ available in electronic form.  Having saved time, the Financial Aid
 Office can give the information to the counselors, who in turn can make
 decisions on offering aid packages at an earlier point of time.  Thus,
 the response time to students will be greatly reduced.</p>
-
 <h4>Increased Customer Convenience</h4>
-
 <p>Putting the forms online enables students to download and submit the
 forms 24 hours a day.  These online actions are much more convenient
 than obtaining the paper forms from the Financial Aid office and
@@ -495,16 +433,13 @@ In addition, supplying the same information multiple times can be
 avoided.  Examples of common information include: student name, social
 security number, and special circumstances that must be taken into
 account.</p>
-
 <p>The online help feature gives even further convenience to students.  By
 putting the frequently asked student questions and answers online,
 students who come across problems when filling out the application forms
 are likely to be able to find the answers to their problem.  If not,
 they can submit their questions online and get back the answer via email
 in a short period of time.</p>
-
 <h4>Reduced errors</h4>
-
 <p>One of the goals of our proposed upgrades is to reduce the potential
 errors that are bound to occur during the manual entrance of student
 information.  There will surely be a decrease in incorrect data entrance
@@ -512,14 +447,11 @@ after the new system takes the human error out of the error-checking
 process.  This is especially important when specific fields are critical
 to the decision of whether or not a student will be offered a relatively
 favorable aid package.</p>
-
 <h3>Outsourcing vs. In-House</h3>
-
 <p>The decision to outsource information technology services versus using
 in-house resources is an issue that many organizations face. Both paths
 have their advantages and disadvantages, some of which will be discussed
 here.</p>
-
 <p>Outsourcing usually involves contracting with a firm to implement a
 solution while maintaining project control and management inside the
 organization. Outsourcing is an attractive solution to many
@@ -530,7 +462,6 @@ personal who are experts at implementing change. Another positive is
 that a consultant can bring in innovative views and may see your
 business from a whole new angle, possibly avoiding destructive states of
 mind such as groupthink.</p>
-
 <p>However, outsourcing is not always the best solution and the negative
 aspects must also be considered. Topics such as security and
 confidentiality of data and other information, control and ownership of
@@ -539,14 +470,12 @@ and need of support once the contract is fulfilled. Also, there is
 sometimes resistance to change from inside the organization. Employees
 may see the consultants as a threat and oppose changes to their
 (employees) tasks and processes.</p>
-
 <p>The issue of costs could act as a positive or a negative, depending on
 the situation. The biggest negative cost issue for outsourcing is that
 a consultant can cost anywhere from two to ten times as much as a
 regular employee. On the positive side, however, the consultant will
 only be around short-term, while a full-time employee is usually a
 long-term investment.</p>
-
 <p>The Department of Financial Aid at the University of Wisconsin - Madison
 currently uses a combination of department employees and contract
 employees from the Department of Information Technology (DoIT) at
@@ -559,7 +488,6 @@ However, considerations have been made in the departments budget for
 outsourcing from DoIT. Currently, enough funding is set up specifically
 for paying for DoIT employees, so it would be imprudent to not use the
 money for outsourcing.</p>
-
 <p>Because the amount of funding for hiring DoIT consultants varies
 year-to-year with each new budget, more money could be allocated in the
 future to support the needs of this new system. The Department of
@@ -568,11 +496,8 @@ development needs. We recommend getting two more consultants from DoIT
 to handle the implementation of the new Web-enabled financial aid
 system, while the department employees manage the project and the
 consultants.</p>
-
 <h3>Selecting Technology, Equipment, Vendor, and Service Provider</h3>
-
 <h4>Vendor and Service Provider: DoIT</h4>
-
 <p>	Unlike most other business entities, the Financial Aid Office has
 the luxury of not having to pay for Internet service.  This luxury is
 due to the fact that they are automatically allocated server through the
@@ -585,17 +510,10 @@ these services with other ones.  Instead of comparing service providers,
 we instead researched the networking capabilities of DoIT.  In this
 section, we first provide a diagram of the DoIT/UW network, and then we
 discuss the use of ATM by DoIT.</p>
-
-<div class="center"><img src="campusbackbone.png" alt="[Diagram of UW-Madison Network]" /></div>
-
+<div class="center"><img alt="[Diagram of UW-Madison Network]" src="campusbackbone.png"/></div>
 <p>	The UW-Madison Division of Information Technology is the service provider for the entire UW Campus.  The UW network under DoIT may either be classified as a large Local Area Network (LAN) or a small Metro Area Network (MAN).  The following depicts this network:</p>
-
-
-
 <h5>Overview of Technology Utilized by DoIT</h5>
-
 <p>	In order to facilitate transmissions among its network, DoIT has chosen to use ATM technology.  Using ATM, DoIT is able to offer two main types of connections to their customers (DoIT, 1).</p>
-
 <p>The first type of connection used by DoIT is an ATM LAN Emulation SVC
 (Switched Virtual Circuit).  SVC technology is ideal for customers who
 wish to configure and emulate LANs at different points around campus.  A
@@ -630,16 +548,12 @@ and/or 5 cabling.  If this cabling was replaced with a faster medium
 such as fiberoptic, the 100MB limit would likely increase substantially.
  Of course, this occurrence would cause DoIT to re-evaluate the
 appropriate limits of the office's PVC.]</p>
-
 <h4>Technology and Equipment</h4>
-
 <p>	In anticipation for the Financial Aid Office's need to purchase a new
 server, we first considered the most appropriate server software for the
 office's needs.  After that, we decided that best hardware available in
 the server marketplace.</p>
-
 <h5>Server Software</h5>
-
 <p>While determining the appropriate software necessary for the Financial
 Aid project, we took several elements into consideration.  The single
 most important criterion set up under our analysis of this software was
@@ -657,21 +571,18 @@ important due to the fact that Financial Aid information is of a highly
 personal nature and a student would likely have grounds for a lawsuit is
 his/her information was not properly secured over an Internet
 transmission.</p>
-
 <p>	A number of server software packages were considered
 during our analysis.  Fortunately, this field narrowed considerably
 following our decision for the Financial Aid Office to stick with their
 Windows NT operating system.  With the operating system being known, we
 were able to then narrow down the best server package available for
 Windows NT.</p>
-
 <p>	The following paragraphs discuss each of the three servers taken into
 consideration by our team: the Microsoft Internet Information Server,
 the Netscape Enterprise Server, and the Website Professional Server
 (OReilly &amp; Assoc.).  After discussing each of these servers, a graphical
 comparative analysis is done.  Finally, a recommendation for the
 foremost server package is given.</p>
-
 <p>	The Microsoft Internet Information Server or IIS is by far the most
 popular server for Windows NT users.  Web developers are especially
 empowered by IIS because of its extensive support for Active Server
@@ -685,7 +596,6 @@ easy on the back-end while returning all requests to the front-end as
 standard HTML.  Ultimately, this allows a developer to create "dynamic
 web sites and applications that are accessible by any browser (Alwang,
 1)."</p>
-
 <p> 	The second package considered by our team was the Netscape Enterprise
 Server.  Recently voted the "Editor's Choice for cross-platform or UNIX"
 by PC magazine, this server allows a tremendous amount of flexibility
@@ -694,7 +604,6 @@ and manageability for offices which rely on multiple operating systems
 industry leading server packages and also allows a great deal of
 flexibility to an expert to reconfigure the server for his/her
 departments unique performance and management needs.</p>
-
 <p>	The third server package considered was the WebSite Professional by  '
 OReilly Associates.  This package is specifically designed for web
 developers running their systems on Window 95 or NT (Freed, 1).  The
@@ -704,15 +613,13 @@ several query examples that facilitate the development of an extensive
 front-end for one's database.  The WebSite Professional is not capable
 of conforming for a large corporate site, but rather is designed more
 for an ISP or smaller intranet.</p>
-
-<div class="center">Comparison by various criteria for server packages:<br />
+<div class="center">Comparison by various criteria for server packages:<br/>
 <table class="border">
 <tr><th>Web-Dev</th><th>Administration</th><th>Security</th><th>Documentation</th><th>Cost</th></tr>
 <tr><td>IIS 3.0</td><td>Excellent</td><td>Excellent</td><td>V. Good</td><td>V. Good</td><td>$0</td></tr>
 <tr><td>NES 2.0.1</td><td>Excellent</td><td>Excellent</td><td>Good</td><td>V. Good</td><td>$1,295</td></tr>
 <tr><td>WebSite Prof.</td><td>V. Good</td><td>Good</td><td>V. Good</td><td>Excellent</td><td>$499</td></tr>
 </table></div>
-
 <p>	After a careful study of the three choices, we decided that the
 IIS 3.0 was the best available server package for the needs of the
 Financial Aid Office.  As one can see, all three possible choices
@@ -729,9 +636,7 @@ servers do support scripting, they do not include ADO capabilities.
 Website Professional, in particular, leans heavily on ColdFusion -- a
 software package whose owners have recently experienced tremendous
 financial problems.</p>
-
 <h5>Server Hardware Configuration</h5>
-
 <p>In order to run a high-traffic Web site, the Department of Financial
 Aid will need either a high-performance server, or a cluster of servers
 that will be load balanced. We recommend going with a single
@@ -741,11 +646,9 @@ a student has an emergency and the Web site is down, they can still
 contact the Financial Aid Department through normal means (i.e.
 telephone). In fact, this would be the preferred method of communication
 in an emergency.</p>
-
 <p>We will present specifications for two different servers: one from
 <a href="http://www.dell.com" target="_top">Dell Computer
-Corporation</a> and one from <a href="http://www.compaq.com"
-target="_top">Compaq</a>. For several reasons, neither of
+Corporation</a> and one from <a href="http://www.compaq.com" target="_top">Compaq</a>. For several reasons, neither of
 these computers will come with an operating system. The first
 benefit is that there is a substantial cost savings to the Financial Aid
 department due to an academic licensing agreement with Microsoft, which
@@ -757,7 +660,6 @@ server). We recommend that the server be configured as a member server
 so that it does not have to worry about authenticating user logons or
 replicating the Security Accounts Manager (SAM) database. This will
 allow the server to focus its resources on serving Web pages.</p>
-
 <div class="center">
 <table class="border">
 <tr><th colspan="2">Dell Server Configuration</th></tr>
@@ -772,7 +674,6 @@ allow the server to focus its resources on serving Web pages.</p>
 <tr><td>Cost:</td><td>$9,864.60</td></tr>
 </table>
 </div>
-
 <div class="center">
 <table class="border">
 <tr><th colspan="2">Compaq Server Configuration</th></tr>
@@ -787,16 +688,12 @@ allow the server to focus its resources on serving Web pages.</p>
 <tr><td>Cost:</td><td>$13,817.00</td></tr>
 </table>
 </div>
-
 <h5>Server Recommendation</h5>
-
 <p>We recommend that the Department of Financial Aid purchase the Dell
 PowerEdge 6450. The main reason for this is, as you can see, there is a
 cost savings of almost $4000 for virtually identical hardware
 configurations.</p>
-
 <h5>Power Protection</h5>
-
 <p>Since this server will be serving a major function and also performing
 database transactions, we recommend purchasing a Uninterruptible Power
 Supply (UPS). An UPS (Uninterruptible Power Supply) provides a
@@ -804,16 +701,13 @@ conditioned and dependable source of power to your electronic equipment
 when the main power source fails. These units protect against surges and
 spikes (filtering) in the power source, as well as provide a continuing
 source of battery power.</p>
-
 <h5>UPS Recommendation</h5>
-
 <p>We recommend that the Department of Financial Aid purchase an American
 Power Conversion (APC) Smart-UPS 1400. Our reasons for choosing this
 unit are that it is rack-mountable, so it can be placed directly above
 or below the Dell server on the rack, and that it is designed to support
 high-traffic, enterprise servers. The detailed specifications for this
 unit are listed below.</p>
-
 <div class="center">
 <table class="border">
 <tr><th colspan="4">AMERICAN POWER CONVERSION SMART-UPS 1400 1400VA LINE INT ACCSLAN
@@ -834,26 +728,20 @@ unit are listed below.</p>
 <tr><th colspan="3">Cost</th><td>$791.95</td></tr>
 </table>
 </div>
-
-
 <h5>RAID Configuration</h5>
-
 <p>In addition to using regular backups, we recommend that the Department
 of Financial Aid use an extra layer of data reliability. A Redundant
 Array of Inexpensive Disks (RAID) is a very common way to ensure that
 data is available in the event of hard disk failure.</p>
-
 <div class="center">
-<img src="raid5.png" alt="[RAID Level 5 diagram]" /><br />
+<img alt="[RAID Level 5 diagram]" src="raid5.png"/><br/>
 Source: <a href="http://www.raid5.com/04_01_05.html" target="_top">http://www.raid5.com/04_01_05.html</a></div>
-
 <p>	The diagram above presents a good visual representation of the
 RAID 5 disk-striping configuration. In this scenario a set of at least
 three disks each allocate a 1/n ratio of space on each disk for parity
 information, where n is the number of disks in the set. This ensures
 that if any one of the disks fails, the information on that disk can be
 recreated from the remaining drives.</p>
-
 <p>	We are recommending RAID 5 over other RAID configurations for several
 reasons. The first reason is that it provides better data integrity than
 other configurations such as RAID 0, which is disk striping (no parity).
@@ -863,36 +751,26 @@ Department. The final reason is that it provides the fast read data
 transaction rate. This is good because an Internet server is going to be
 almost completely to reading data from the disk to serve out to the
 World Wide Web.</p>
-
-
-
 <h3>Planning for Implementation and Operational Considerations</h3>
-
 <h4>Implementation Details</h4>
-
 <p>Now that we have discussed the various factors that must be
 considered
 before new functionality is implemented, we are ready to present our
 solution for the UW Financial Aid Office.  The following is a series of
 screen shots, together with HTML and ASP code (Note: this code is only a
 sample and not ready for a full launch):</p>
-
 <div class="center">
-<iframe id="screen1" src="is365screen1.html" width="90%" height="400px"></iframe><br />
-<iframe id="screen2" src="is365screen2.html" width="90%" height="400px"></iframe><br />
-<iframe id="screen3" src="is365screen3.html" width="90%" height="400px"></iframe><br />
+<iframe height="400px" id="screen1" src="is365screen1.html" width="90%"></iframe><br/>
+<iframe height="400px" id="screen2" src="is365screen2.html" width="90%"></iframe><br/>
+<iframe height="400px" id="screen3" src="is365screen3.html" width="90%"></iframe><br/>
 </div>
-
 <h3>Operational Planning</h3>
-
 <p>The implementation of this system consists of several distinct
 phases:
 Installation (of hardware and software), Testing, and the final launch
 into Operation. We will examine each of these phases individually in 
 greater depth.</p>
-
 <h4>Installation</h4>
-
 <p>	The server upon which this system will run first needs to be
 installed
 and configured. If additional hard disc storage or backup drives are
@@ -907,7 +785,6 @@ Kensington's Desktop MicroSaver Security System/Security Plates). If the
 environment where the server will be located is open and available to
 many people, additional security features might be considered, such as
 floppy drive locks, case locks, etc.</p>
-
 <p>	Once the hardware is installed, we need to install and configure the
 necessary software. If the servers operating system (OS) comes
 preloaded, it still needs to be configured properly, including setting
@@ -925,9 +802,7 @@ through the installation procedures for the OS and each software
 package. Once all the software packages are installed, we can install
 now all the files we need and have developed for our system: install all
 scripts, HTML pages, COM objects, ODBC data sources, etc.</p>
-
 <h4>Testing</h4>
-
 <p>	There are two stages of testing that should be used, referred to
 here as alpha and beta testing. Alpha testing is our own in-house
 testing which will be performed, where we test the system with dummy
@@ -938,7 +813,6 @@ determine the optimal maximum system load. Knowing the maximum load of
 the system will allow us to determine the best number of students to
 notify at once to come to the website and update their financial aid
 information.</p>
-	
 <p>	Once the system has passed our alpha testing, we subject it to beta
 testing, with  real-world data and real world users: we can select a
 percentage of students to test the system, and report back any problems
@@ -947,9 +821,7 @@ difficulties with the interface, or lack of online documentation. Beta
 testing often uncovers bugs or difficulties with the design that could
 not have been found in a lab environment, but that could be detrimental
 if discovered once the system is in production.</p>
-
 <h4>Operation</h4>
-
 <p>	When we are reasonably confident of the stability and
 accountability of our system we can launch it in full to all students,
 and begin our operations procedures. Once we have successfully
@@ -959,7 +831,6 @@ include auditing the system regularly, making fixes to the system when
 necessary, and backing up the system as frequently as necessary.
 Following through with each of these sets of procedures will help to
 ensure that our system continues to work reliably into the future.</p>
-	
 <p>	Borrowing from the Just In Time (JIT) production philosophy, we need
 a focus on preventative maintenance, to eliminate anomalies before they
 become problems further down the road (McClurg, 1). Regular auditing of
@@ -974,7 +845,6 @@ fails completely. Likewise, we need to checkup our database system
 regularly, and make sure it is operating correctly. To do this, we can
 implement report generation in our system, to keep us updated on any
 vital information.</p>
-
 <p>	If we uncover any problems with our system, it is key that
 we fix them as soon as possible. All necessary security and bug fixes
 should be applied to the operating system when they become available.
@@ -984,17 +854,14 @@ correctly, we may still need to make changes. Perhaps the server cannot
 handle the number of concurrent connections, which might lead us to
 alter our programs, or perhaps even necessitate the purchase of a new
 server.</p>
-
 <p>One element of our operational strategy that should never be
 overlooked is developing a backup and recovery strategy.  As W. Curtis
 Preston tells us:</p>
-
 <blockquote>My father used to tell me, "There are two types of
 motorcycle owners. Those who have fallen, and those who will fall."
 The same rule applies to system administrators. There are those who have
 lost a disk drive and those who will lose a disk drive (Preston,
 3).</blockquote>
-
 <p>Since we should expect to lose data sometime in the future, we need
 to prepare for this loss, and the recovery from it. Preston defines a
 six-step plan to developing a backup strategy: </p>
@@ -1006,7 +873,6 @@ six-step plan to developing a backup strategy: </p>
 <li>Document what you have</li>
 <li>Test, test, test (Preston, 5)</li>
 </ol>
-
 <p>What may be an unacceptable loss another organization may here be
 acceptable: if the system periodically send an email reminder to
 students (stepping through the list of students in a defined order) to
@@ -1030,53 +896,44 @@ ensure that even with a change of administrators or support staff, that
 all procedures will be known; and periodic tests of our backup and
 recovery procedures will ensure a timely recovery when the system 
 fails.</p>
-
 <p>	The operations phase of this project means ensuring the system
 runs reliably and effectively.  Key to effective operations are regular
 system audits, fixes to the system when necessary, and a properly
 executed backup and recovery strategy. Following through with each of
 these sets of procedures will help to ensure that our system continues
 to operate reliably into the future.</p>
-
-
 <h2>Final Recommendations &amp; Conclusion</h2>
-
 <h3>Review</h3>
-
 <p>In this case study, we have investigated the aspects to be considered
 when making the investment decision for the information system in the
 Financial Aid Office. We made our recommendations with respect to the
 following aspects:</p>
 <ul>
-	<li>Competitive advantage to be gained from having the system</li>
-	<li>Cost to build the system in-house or outsource</li>
+<li>Competitive advantage to be gained from having the system</li>
+<li>Cost to build the system in-house or outsource</li>
 </ul>
 <p>When deciding on the equipment for the system, we looked into the
 following aspects:</p>
 <ul>
-	<li>Security of student data transfer over the network</li>
-	<li>Support to the web developer provided by the server</li>
-	<li>Strategic control over web administration</li>
-	<li>Cost of buying the new equipment</li>
-	<li>Capacity of the web server to accommodate heavy traffic</li>
-	<li>Reliability of the system</li>
+<li>Security of student data transfer over the network</li>
+<li>Support to the web developer provided by the server</li>
+<li>Strategic control over web administration</li>
+<li>Cost of buying the new equipment</li>
+<li>Capacity of the web server to accommodate heavy traffic</li>
+<li>Reliability of the system</li>
 </ul>
-
 <p>In addition to investment and the equipment, we gave suggestions on
 the
 implementation and operation planning according to the following
 consideration:</p>
 <ul>
-	<li>Problem prevention to be achieved by a series of testing</li>
-	<li>Possibility for the need of error fixing</li>
-	<li>Data recovery in case of data loss</li>
+<li>Problem prevention to be achieved by a series of testing</li>
+<li>Possibility for the need of error fixing</li>
+<li>Data recovery in case of data loss</li>
 </ul>
-
 <h3>Summary of Immediate Recommendations</h3>
-
 <p>These are recommendations that can be implemented without further
 funding from the University or any other source.</p>
-
 <p>The data handled by this system is very important. Therefore a
 thorough
 backup needs to be regularly performed. We recommend doing weekly full
@@ -1084,7 +941,6 @@ backups and daily incremental backups. Tapes kept in the building should
 be stored in fireproof cabinets. Additionally, several copies of full
 backup tapes should be kept off site to ensure the utmost protection
 against data loss or catastrophe.</p>
-
 <p>Test. Keep testing. Then test some more. The importance of extensive
 testing cannot be understated. The first thing to test is that no bad
 data will ever make it into the database. Ensure this by checking for
@@ -1095,7 +951,6 @@ usability feedback. Finally, try to replicate the amount of traffic that
 the system will actually have to handle in production. Many sites in the
 new economy have not been able to cope with the amount of traffic that a
 production environment will require.</p>
-
 <p>Put up a Frequently Asked Questions section to reduce calls to the
 office. A good way to do this would be to break the questions down by
 the parts of the form they relate to. Then put links to those questions
@@ -1103,10 +958,8 @@ and answers by each associated section of the form. Putting the answers
 right that the users fingertips will ensure that many of the most common
 questions will get answered quickly and without tying up Financial Aid
 staff.</p>
-
 <p>Release information in shifts so that the server is not overloaded
 all at once.</p>
-
 <p>	Finally, once the system is in production, plan to open up its use
 in
 waves (i.e. work to ensure that the system is not required to handle all
@@ -1114,14 +967,11 @@ of the data in a short amount of time, leaving it unused a great
 majority of the time). This approach will make certain that the system
 will be able to efficiently meet the required demand, pleasing users and
 administrators alike.</p>
-
 <h3>Summary of Immediate Recommendations</h3>
-
 <p>If the Department of Financial Aid can successfully secure funding
 for
 this project, from either inside the University or an outside source, we
 recommend taking the following steps.</p>
-
 <p>Our first recommendation is to acquire one more employee from either
 the
 UW-Madisons Department of Information Technology (DoIT). We recommend
@@ -1131,7 +981,6 @@ the system is in place and the kinks are worked out. This will most
 likely involve petitioning the Board of Regents for a larger budget, but
 the Department of Financial Aid has many good reasons for implementing
 this system, so it should go smoothly.</p>
-
 <p>We also recommend buying a dedicated server for this system. This
 application will most likely experience large amounts of traffic,
 especially when financial aid application deadlines begin to approach,
@@ -1141,34 +990,21 @@ PowerEdge server, which is designed to handle enterprise sized
 applications. It is recommended to purchase a good uninterruptible power
 supply. This will ensure that the system is shut down smoothly in the
 event of a power loss.</p>
-
 <h2>Bibliography</h2>
-
 <p>Alwang, Greg.(1) "Microsoft Internet Information Server." 1999.
 <a href="http://www8.zdnet.com/pcmag/features/webserver/iwsr5.htm" target="_top">http://www8.zdnet.com/pcmag/features/webserver/iwsr5.htm</a>.</p>
-
 <p>Alwang, Greg.(2) "Netscape Enterprise Server." 1999.
 <a href="http://www8.zdnet.com/pcmag/features/webserver/iwsr6.htm" target="_top">http://www8.zdnet.com/pcmag/features/webserver/iwsr6.htm</a>.</p>
-
-
 <p>Freed, Les. "Website Professional." 1999.
 <a href="http://www8.zdnet.com/pcmag/features/webserver/iwsr9.htm" target="_top">http://www8.zdnet.com/pcmag/features/webserver/iwsr9.htm</a>.</p>
-
 <p>McClurg, Tim. "Just-in-Time (JIT) Production Systems" PowerPoint
 presentation. 5 Dec 2000.
 <a href="http://instruction.bus.wisc.edu/tmcclurg/documents/L120500students.ppt" target="_top">http://instruction.bus.wisc.edu/tmcclurg/documents/L120500students.ppt</a>.</p>
-
 <p>Preston, W. Curtis. <i>Unix Backup and Recovery</i>. 1999, O'Reilly &amp;
 Associates, Inc.</p>
-
 <p><i>U.S. News &amp; World Report</i>. 2000.
 <a href="http://www.usnews.com/usnews/edu/college/rankings/natunivs/natu_a2.htm" target="_top">http://www.usnews.com/usnews/edu/college/rankings/natunivs/natu_a2.htm</a>.</p>
-
-
 <p>UW Division of Information Technology (DoIT). 2000.
 <a href="http://www.doit.wisc.edu/services/network/index.htm" target="_top">http://wiscinfo.doit.wisc.edu/netops/data/*.html</a>.</p>
-
-
 </body>
 </html>
-
